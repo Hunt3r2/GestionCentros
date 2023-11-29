@@ -88,7 +88,7 @@ public class Menú {
 		public void pedirDatosProfesor() {
 				profesores.getNombreAlumno();
 				profesores.getApellidoAlumno();
-				profesores.getEmail();
+				profesores.();
 				Profesor nuevoProfesor = new Profesor();
 				profesores.getNombre1();
 				this.vectorProfesor[0] = nuevoProfesor;
