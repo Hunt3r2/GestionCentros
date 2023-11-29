@@ -5,9 +5,10 @@ public class Menú {
 	Profesor profesores;
 	
 	Profesor[] vectorProfesor;
+	boolean claseLLena;
 	
 	public Menú() {
-			profesores = new Profesor();
+			profesores = new Profesor(null, null, null, null, null, claseLLena, 0, 0);
 			this.vectorProfesor = new Profesor[2];
 		}
 
@@ -33,10 +34,17 @@ public class Menú {
 			case 1:
 				menu.opcionProfesor();
 			case 2:
+				
+			case 4:
+                System.out.println("Gracias por usar nuestro software.");
+        		System.out.println("CERRANDO...");
+                break;
+            default:
+                System.out.println("Opción no válida");
+        }
 		
-		}
+	}
 		
-		}
 		
 		public void opcionProfesor() {
 			System.out.println("--------------------------------------------");
@@ -86,9 +94,11 @@ public class Menú {
 		}
 		
 		public void pedirDatosProfesor() {
-				profesores.getNombreAlumno();
-				profesores.getApellidoAlumno();
-				profesores.();
+				profesores.getNombre();
+				profesores.getApellido();
+				profesores.getEmail();
+				profesores.getTlfProfesor();
+				
 				Profesor nuevoProfesor = new Profesor();
 				profesores.getNombre1();
 				this.vectorProfesor[0] = nuevoProfesor;
@@ -105,6 +115,19 @@ public class Menú {
 			System.out.println("Apellido: " + apellido);
 			return nombre;
 		}
+		
+		private int espacioVector() {
+			int huecoVector = 0;
+			for (int i = 0;i<vectorAlumnos.length;i++) {
+				if(vectorAlumnos[i]== null) {
+					huecoVector = i;
+					break;
+				}
+			}
+			return huecoVector;
+		}
+		
+		
 		
 		
 		
