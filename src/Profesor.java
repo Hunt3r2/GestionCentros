@@ -87,7 +87,7 @@ public class Profesor {
 
 
 	private void setNombre(String nombre2) {
-		// TODO Auto-generated method stub
+		this.nombre = nombre;
 		
 	}
 
@@ -99,8 +99,7 @@ public class Profesor {
 
 
 	public String añadirProfesor() {
-		Scanner sc2 = new Scanner(System.in);
-		this.nombre = sc2.next();
+		
 		System.out.println("Nombre: " + nombre);
 		System.out.println("Introduzca el primer apellido del profesor (MAX 40 caracteres): ");
 		Scanner ape = new Scanner(System.in);

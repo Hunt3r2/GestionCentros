@@ -94,32 +94,25 @@ public class Menú {
 		}
 		
 		public void pedirDatosProfesor() {
+				Profesor nuevoProfesor = new Profesor(null, null, null, null, null, claseLLena, 0, 0);
 				profesores.getNombre();
 				profesores.getApellido();
 				profesores.getEmail();
 				profesores.getTlfProfesor();
 				
-				Profesor nuevoProfesor = new Profesor();
-				profesores.getNombre1();
-				this.vectorProfesor[0] = nuevoProfesor;
-				
-		}
-		
-		public void añadirProfesor() {
-			Scanner sc2 = new Scanner(System.in);
-			this.vectorProfesor[0] = sc2.next();
-			System.out.println("Nombre: " + nombre);
-			System.out.println("Introduzca el primer apellido del profesor (MAX 40 caracteres): ");
-			Scanner ape = new Scanner(System.in);
-			this.apellido = ape.next();
-			System.out.println("Apellido: " + apellido);
-			return nombre;
+				int huecoVectorProfesores = espacioVector();
+				if(huecoVectorProfesores<vectorProfesor.length) {
+					this.vectorProfesor[huecoVectorProfesores] = nuevoProfesor;
+				}
+				else {
+					claseLLena = true;
+				}
 		}
 		
 		private int espacioVector() {
 			int huecoVector = 0;
-			for (int i = 0;i<vectorAlumnos.length;i++) {
-				if(vectorAlumnos[i]== null) {
+			for (int i = 0;i<vectorProfesor.length;i++) {
+				if(vectorProfesor[i]== null) {
 					huecoVector = i;
 					break;
 				}
