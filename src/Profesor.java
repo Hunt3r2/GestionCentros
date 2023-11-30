@@ -99,7 +99,8 @@ public class Profesor {
 
 
 	public String añadirProfesor() {
-		
+		Scanner nom = new Scanner(System.in);
+		this.nombre = nom.next();
 		System.out.println("Nombre: " + nombre);
 		System.out.println("Introduzca el primer apellido del profesor (MAX 40 caracteres): ");
 		Scanner ape = new Scanner(System.in);

@@ -77,7 +77,7 @@ public class Menú {
 			System.out.println("--------------------------------------------");
 			System.out.println("Listado de profesores:");
 			System.out.println("--------------------------------------------");
-
+			System.out.println(profesores.nombre + " " + profesores.apellido);
 			System.out.println("Escoger profesor (0: Volver al menú anterior):");
 			System.out.println("OPCION:");
 			
