@@ -13,6 +13,7 @@ public class Profesor {
 	String ID ;
 	String nombre;
 	String apellido;
+	String apellido2;
 	String email;
 	String tlf;
 	String ni;
@@ -99,6 +100,7 @@ public class Profesor {
 
 
 	public String añadirProfesor() {
+		System.out.println("Introduzca el nombre del profesor (MAX 30 caracteres):");
 		Scanner nom = new Scanner(System.in);
 		this.nombre = nom.next();
 		System.out.println("Nombre: " + nombre);
@@ -106,6 +108,18 @@ public class Profesor {
 		Scanner ape = new Scanner(System.in);
 		this.apellido = ape.next();
 		System.out.println("Apellido: " + apellido);
+		System.out.println("Introduzca el segundo apellido del profesor (opcional):");
+		Scanner ape2 = new Scanner(System.in);	
+		this.apellido = ape.next();
+		System.out.println("Segundo apellido: " + apellido);
+		Scanner em = new Scanner(System.in);
+		System.out.println("Introduzca el email del profesor (cadena@profesor.es):");
+		this.email = em.next();
+		System.out.println("Email: " + email);
+		System.out.println("Introduzca el teléfono del profesor ([6,7 o 9] y 8 números):");
+		this.email = em.next();
+		System.out.println("Telefono: " + email);
+		
 		return nombre;
 	}
 	

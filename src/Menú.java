@@ -60,7 +60,6 @@ public class Menú {
 			
 			switch(opcion1) {
 			case 1:
-				System.out.println("Introduzca el nombre del profesor (MAX 30 caracteres):");
 				profesores.añadirProfesor();
 			case 2:
 				consultarProfesor();
