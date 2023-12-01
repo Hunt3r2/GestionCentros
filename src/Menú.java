@@ -35,6 +35,8 @@ public class Menú {
 				menu.opcionProfesor();
 			case 2:
 				
+			case 3:
+				
 			case 4:
                 System.out.println("Gracias por usar nuestro software.");
         		System.out.println("CERRANDO...");
@@ -63,7 +65,31 @@ public class Menú {
 				profesores.añadirProfesor();
 			case 2:
 				consultarProfesor();
+			case 3:
+				main(null);
 			}
+		}
+			
+			public void opcionAlumno() {
+				System.out.println("--------------------------------------------");
+				System.out.println("ALUMNOS:");
+				System.out.println("--------------------------------------------");
+				System.out.println("1. Añadir alumno.");
+				System.out.println("2. Consultar alumnos.");
+				System.out.println("3. Volver.");
+				System.out.println("--------------------------------------------");
+				System.out.println("OPCION:");
+				Scanner sc = new Scanner(System.in);
+				int opcion1 = sc.nextInt();
+				
+				switch(opcion1) {
+				case 1:
+					profesores.añadirProfesor();
+				case 2:
+					consultarProfesor();
+				case 3:
+					main(null);
+				}
 			
 			
 			
