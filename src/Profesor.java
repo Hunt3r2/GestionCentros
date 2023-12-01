@@ -19,16 +19,22 @@ public class Profesor {
 	String numeroDocumento;
 	String numeroID[] = new String[] {"0","1","2","3","4"};
 	
-	 public Profesor() {
+	 public Profesor(String ID, String nombre, String apellido,String apellido2, String email, String telefono, String numeroDocumento) {
 	        this.setIdProfesor(generarIdProfesor());
 	        this.setNombre();
 	        this.setPrimerApellido();
 	        this.setTelefono();
 	        this.setEmail();
 	        this.setNumeroDocumento();
+	    	this.ID = ID;
+	    	this.nombre = nombre;
+	    	this.apellido = apellido;
+	    	this.apellido2 = apellido2;
+	    	this.email = email;
+	    	this.telefono = telefono;
+	    	this.numeroDocumento = numeroDocumento;
 	        
-	        
-	        
+	  
 	    }
 	 
 

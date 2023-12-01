@@ -8,11 +8,11 @@ public class Menú {
 	boolean claseLLena;
 	
 	public Menú() {
-			profesores = new Profesor();
+			profesores = new Profesor(null, null, null, null, null, null, null);
 			this.vectorProfesor = new Profesor[2];
 		}
 	
-	Profesor nuevoProfesor = new Profesor();		
+	Profesor nuevoProfesor = new Profesor(null, null, null, null, null, null, null);		
 
 	
 
@@ -205,7 +205,7 @@ public class Menú {
 		}
 		
 		
-		
+		// para sacar los datos uso un bucle for con string format, tambien deberia hacer  
 		
 		
 	
