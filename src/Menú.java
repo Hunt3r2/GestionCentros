@@ -8,11 +8,19 @@ public class Menú {
 	boolean claseLLena;
 	
 	public Menú() {
+<<<<<<< HEAD
 			profesores = new Profesor(null, null, null, null, null, null, null);
 			this.vectorProfesor = new Profesor[2];
 		}
 	
 	Profesor nuevoProfesor = new Profesor(null, null, null, null, null, null, null);		
+=======
+			profesores = new Profesor();
+			this.vectorProfesor = new Profesor[2];
+		}
+	
+	Profesor nuevoProfesor = new Profesor();		
+>>>>>>> b1e528685a299f000670c1ebcb4c10b9b0cc3de7
 
 	
 
