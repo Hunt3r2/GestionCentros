@@ -15,22 +15,22 @@ public class Profesor {
 	String apellido;
 	String apellido2;
 	String email;
-	String tlf;
-	String ni;
+	String telefono;
+	String numeroDocumento;
 	String numeroID[] = new String[] {"0","1","2","3","4"};
 	
-	 public Profesor(String nombre, String primerApellido, String telefono, String email, String numeroDocumento, boolean esTutor, double sueldo, int diasAsuntosPropios) {
+	 public Profesor() {
 	        this.setIdProfesor(generarIdProfesor());
-	        this.setNombre(nombre);
-	        this.setPrimerApellido(primerApellido);
-	        this.setTelefono(telefono);
-	        this.setEmail(email);
-	        this.setNumeroDocumento(numeroDocumento);
-	        this.setEsTutor(esTutor);
-	        this.setSueldo(sueldo);
-	        this.setDiasAsuntosPropios(diasAsuntosPropios);
-	        this.setSegundoApellido(""); 
+	        this.setNombre();
+	        this.setPrimerApellido();
+	        this.setTelefono();
+	        this.setEmail();
+	        this.setNumeroDocumento();
+	        
+	        
+	        
 	    }
+	 
 
 	
 	private void setIdProfesor(Object generarIdProfesor) {
@@ -63,31 +63,31 @@ public class Profesor {
 	}
 
 
-	private void setNumeroDocumento(String numeroDocumento) {
+	private void setNumeroDocumento() {
 		// TODO Auto-generated method stub
 		
 	}
 
 
-	private void setEmail(String email2) {
+	private void setEmail() {
 		// TODO Auto-generated method stub
 		
 	}
 
 
-	private void setTelefono(String telefono) {
+	private void setTelefono() {
 		// TODO Auto-generated method stub
 		
 	}
 
 
-	private void setPrimerApellido(String primerApellido) {
+	private void setPrimerApellido() {
 		// TODO Auto-generated method stub
 		
 	}
 
 
-	private void setNombre(String nombre2) {
+	private void setNombre() {
 		this.nombre = nombre;
 		
 	}
@@ -119,7 +119,6 @@ public class Profesor {
 		System.out.println("Introduzca el teléfono del profesor ([6,7 o 9] y 8 números):");
 		this.email = em.next();
 		System.out.println("Telefono: " + email);
-		
 		return nombre;
 	}
 	
@@ -160,7 +159,7 @@ public class Profesor {
 
 
 	public String getTlfProfesor() {
-		return tlf;
+		return telefono;
 		
 	}
 
@@ -175,6 +174,8 @@ public class Profesor {
 		return apellido;
 		
 	}
+	
+	
 	
 
 }
