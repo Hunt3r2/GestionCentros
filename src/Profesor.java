@@ -21,8 +21,8 @@ public class Profesor {
 	
 	 public Profesor(String ID, String nombre, String apellido,String apellido2, String email, String telefono, String numeroDocumento) {
 	        this.setIdProfesor(generarIdProfesor());
-	        this.setNombre();
-	        this.setPrimerApellido();
+	        this.setNombre(nombre);
+	        this.setPrimerApellido(apellido);
 	        this.setTelefono();
 	        this.setEmail();
 	        this.setNumeroDocumento();
@@ -87,13 +87,13 @@ public class Profesor {
 	}
 
 
-	private void setPrimerApellido() {
-		// TODO Auto-generated method stub
+	void setPrimerApellido(String apellido) {
+		this.apellido = apellido;
 		
 	}
 
 
-	private void setNombre() {
+	public void setNombre(String nombre) {
 		this.nombre = nombre;
 		
 	}

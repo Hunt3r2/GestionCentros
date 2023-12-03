@@ -8,7 +8,6 @@ public class Menú {
 	
 	Profesor[] vectorProfesor;
 	Alumno[] vectorAlumno;
-	boolean claseLLena;
 	
 	
 	public Menú() {
@@ -64,6 +63,9 @@ public class Menú {
 		
 	
 		public void opcionProfesor() {
+			boolean volver = false;
+			
+		do {
 			System.out.println("--------------------------------------------");
 			System.out.println("PROFESORES:");
 			System.out.println("--------------------------------------------");
@@ -78,11 +80,17 @@ public class Menú {
 			switch(opcion1) {
 			case 1:
 				pedirDatosProfesor();
+				break;
 			case 2:
 				consultarProfesor();
+				break;
 			case 3:
-				main(null);
+				volver = true;
+				break;
+			default:
+				System.out.println("Opcion no valida");
 			}
+		}while(!volver);
 		}
 			
 			public void opcionAlumno() {
@@ -200,11 +208,13 @@ public class Menú {
 					System.out.println("Introduzca el teléfono del profesor ([6,7 o 9] y 8 números):");
 					nuevoProfesor.telefono = tlf.next();
 					System.out.println("Telefono: " + nuevoProfesor.telefono);
+					nuevoProfesor.setNombre(nuevoProfesor.nombre);
+					nuevoProfesor.setPrimerApellido(nuevoProfesor.apellido);
+					
 					return;
 					
 				}
 				else {
-					claseLLena = true;
 					System.out.println("La clase está llena");
 				}
 		}
