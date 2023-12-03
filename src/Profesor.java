@@ -10,13 +10,13 @@ public class Profesor {
 	}
 	
 	
-	String ID ;
+	String ID = "p";
 	String nombre;
 	String apellido;
 	String apellido2;
 	String email;
 	String telefono;
-	String numeroDocumento;
+	String numeroDocumento = "p";
 	String numeroID[] = new String[] {"0","1","2","3","4"};
 	
 	 public Profesor(String ID, String nombre, String apellido,String apellido2, String email, String telefono, String numeroDocumento) {

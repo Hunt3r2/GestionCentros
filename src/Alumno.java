@@ -12,11 +12,11 @@ public class Alumno {
 	String apellido;
 	String apellido2;
 	String email;
-	String tlf;
-	String ni;
+	String telefono;
+	String numeroDocumento;
 	String numeroID[] = new String[] {"0","1","2","3","4"};
 	
-	 public Alumno(String nombre, String primerApellido, String telefono, String email, String numeroDocumento, boolean esTutor, double sueldo, int diasAsuntosPropios) {
+	 public Alumno(String nombre, String primerApellido, String telefono, String email, String numeroDocumento, String ID, String apellido2, String apellido) {
 	        this.setIdAlumno(generarIdAlumno());
 	        this.setNombre(nombre);
 	        this.setPrimerApellido(primerApellido);
@@ -24,6 +24,13 @@ public class Alumno {
 	        this.setEmail(email);
 	        this.setNumeroDocumento(numeroDocumento);
 	        this.setSegundoApellido(""); 
+	        this.ID = ID;
+	    	this.nombre = nombre;
+	    	this.apellido = apellido;
+	    	this.apellido2 = apellido2;
+	    	this.email = email;
+	    	this.telefono = telefono;
+	    	this.numeroDocumento = numeroDocumento;
 	    }
 	 
 	 private void setIdAlumno(Object generarIdAlumno) {
@@ -88,6 +95,22 @@ public class Alumno {
 	private void setNombre(String nombre2) {
 		// TODO Auto-generated method stub
 		
+	}
+
+	public String getNombre() {
+		return nombre;
+	}
+
+	public String getApellido() {
+		return apellido;
+	}
+
+	public String getEmail() {
+		return email;
+	}
+
+	public String getTlfAlumno() {
+		return telefono;		
 	}
 
 }

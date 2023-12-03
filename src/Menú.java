@@ -3,23 +3,30 @@ import java.util.Scanner;
 public class Menú {
 	
 	Profesor profesores;
+	Alumno Alumnos;
+	
 	
 	Profesor[] vectorProfesor;
+	Alumno[] vectorAlumno;
 	boolean claseLLena;
+	
 	
 	public Menú() {
 			profesores = new Profesor(null, null, null, null, null, null, null);
-			this.vectorProfesor = new Profesor[2];
+			this.vectorProfesor = new Profesor[4];
+			Alumnos = new Alumno(null, null, null, null, null, null, null, null);
+			this.vectorAlumno = new Alumno[2];
+			
 		}
 	
 	Profesor nuevoProfesor = new Profesor(null, null, null, null, null, null, null);		
-
-	
+	Alumno nuevoAlumno = new Alumno(null, null, null, null, null, null, null, null);
 
 	public static void main(String[] args) {
-		Menú menu = new Menú();
-		
-		
+		Menú menu;
+		menu = new Menú();
+		boolean salir = false;
+	do {	
 		
 		System.out.println("Bienvenido al software de gestión de centros educativos.");
 		System.out.println("--------------------------------------------");
@@ -37,21 +44,25 @@ public class Menú {
 			switch (opcion) {
 			case 1:
 				menu.opcionProfesor();
+				break;
 			case 2:
-				
+				break;
 			case 3:
-				
+				menu.opcionAlumno();
+				break;
 			case 4:
                 System.out.println("Gracias por usar nuestro software.");
         		System.out.println("CERRANDO...");
+        		salir = true;
                 break;
             default:
                 System.out.println("Opción no válida");
         }
+	} while(!salir);
 		
 	}
 		
-		
+	
 		public void opcionProfesor() {
 			System.out.println("--------------------------------------------");
 			System.out.println("PROFESORES:");
@@ -88,7 +99,7 @@ public class Menú {
 				
 				switch(opcion1) {
 				case 1:
-					pedirDatosProfesor();
+					añadirAlumno();
 				case 2:
 					consultarProfesor();
 				case 3:
@@ -104,7 +115,7 @@ public class Menú {
 	}
 			public String añadirProfesor() {
 
-				vectorProfesor[0] = nuevoProfesor;
+
 				System.out.println("Introduzca el nombre del profesor (MAX 30 caracteres):");
 				Scanner nom = new Scanner(System.in);
 				nuevoProfesor.nombre = nom.next();
@@ -124,6 +135,12 @@ public class Menú {
 				System.out.println("Introduzca el teléfono del profesor ([6,7 o 9] y 8 números):");
 				nuevoProfesor.telefono = em.next();
 				System.out.println("Telefono: " + nuevoProfesor.telefono);
+				Scanner id = new Scanner(System.in);
+				System.out.println("Introduzca el ID del profesor (cadena@profesor.es):");
+				nuevoProfesor.email = id.next();
+				Scanner dni = new Scanner(System.in);
+				System.out.println("Introduzca el dni del profesor (cadena@profesor.es):");
+				nuevoProfesor.email = dni.next();
 				return nuevoProfesor.nombre;
 				}
 				
@@ -152,18 +169,16 @@ public class Menú {
 		}
 		
 		public void pedirDatosProfesor() {
-				
+				espacioVector();
 				profesores.getNombre();
 				profesores.getApellido();
 				profesores.getEmail();
 				profesores.getTlfProfesor();
-				espacioVector();
 				int huecoVectorProfesores = espacioVector();
 				
 				if(huecoVectorProfesores<vectorProfesor.length) {
 					this.vectorProfesor[huecoVectorProfesores] = nuevoProfesor;
 		
-					vectorProfesor[0] = nuevoProfesor;
 					
 					System.out.println("Introduzca el nombre del profesor (MAX 30 caracteres):");
 					Scanner nom = new Scanner(System.in);
@@ -175,14 +190,15 @@ public class Menú {
 					System.out.println("Apellido: " + nuevoProfesor.apellido);
 					System.out.println("Introduzca el segundo apellido del profesor (opcional):");
 					Scanner ape2 = new Scanner(System.in);	
-					nuevoProfesor.apellido2 = ape.next();
+					nuevoProfesor.apellido2 = ape2.next();
 					System.out.println("Segundo apellido: " + nuevoProfesor.apellido2);
 					Scanner em = new Scanner(System.in);
 					System.out.println("Introduzca el email del profesor (cadena@profesor.es):");
 					nuevoProfesor.email = em.next();
 					System.out.println("Email: " + nuevoProfesor.email);
+					Scanner tlf = new Scanner(System.in);
 					System.out.println("Introduzca el teléfono del profesor ([6,7 o 9] y 8 números):");
-					nuevoProfesor.telefono = em.next();
+					nuevoProfesor.telefono = tlf.next();
 					System.out.println("Telefono: " + nuevoProfesor.telefono);
 					return;
 					
@@ -193,12 +209,51 @@ public class Menú {
 				}
 		}
 		
+		public void añadirAlumno() {
+			Alumnos.getNombre();
+			Alumnos.getApellido();
+			Alumnos.getEmail();
+			Alumnos.getTlfAlumno();
+			espacioVector();
+			int huecoVectorAlumno = espacioVector();
+			
+			if(huecoVectorAlumno<vectorAlumno.length) {
+				this.vectorAlumno[huecoVectorAlumno] = nuevoAlumno;
+	
+
+			
+			
+			System.out.println("Introduzca el nombre del alumno (MAX 30 caracteres):");
+			Scanner nom = new Scanner(System.in);
+			nuevoAlumno.nombre = nom.next();
+			System.out.println("Nombre: " + nuevoAlumno.nombre);
+			System.out.println("Introduzca el primer apellido del alumno (MAX 40 caracteres): ");
+			Scanner ape = new Scanner(System.in);
+			nuevoAlumno.apellido = ape.next();
+			System.out.println("Apellido: " + nuevoAlumno.apellido);
+			System.out.println("Introduzca el segundo apellido del alumno (opcional):");
+			Scanner ape2 = new Scanner(System.in);	
+			nuevoAlumno.apellido = ape.next();
+			System.out.println("Segundo apellido: " + nuevoAlumno.apellido);
+			Scanner em = new Scanner(System.in);
+			System.out.println("Introduzca el email del alumno (cadena@alumno.es):");
+			nuevoAlumno.email = em.next();
+			System.out.println("Email: " + nuevoAlumno.email);
+			System.out.println("Introduzca el teléfono del alumno ([6,7 o 9] y 8 números):");
+			nuevoAlumno.email = em.next();
+			System.out.println("Telefono: " + nuevoAlumno.email);
+			}
+		}
+		
 		private int espacioVector() {
 			int huecoVector = 0;
 			for (int i = 0;i<vectorProfesor.length;i++) {
 				if(vectorProfesor[i]== null) {
 					huecoVector = i;
 					break;
+				}
+				else {
+					System.out.println("La clase está llena");
 				}
 			}
 			return huecoVector;
