@@ -113,4 +113,9 @@ public class Alumno {
 		return telefono;		
 	}
 
+	public Object getId(String ID) {
+		// TODO Auto-generated method stub
+		return ID;
+	}
+
 }

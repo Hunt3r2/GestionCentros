@@ -10,7 +10,7 @@ public class Profesor {
 	}
 	
 	
-	String ID = "p";
+	String ID;
 	String nombre;
 	String apellido;
 	String apellido2;
@@ -129,14 +129,7 @@ public class Profesor {
 	}
 	
 	
-	public String IDañadir() {
-		for (int i = 0;i < 2; i++) {
-			ID = "000" + numeroID[i];
-		}
-		return ID;
-	}
-
-	void profesor1() {
+		void profesor1() {
 		System.out.println("--------------------------------------------");
 		System.out.println("INFO PROFESOR:");
 		System.out.println("ID: " + ID);
@@ -179,6 +172,13 @@ public class Profesor {
 	public String getApellido() {
 		return apellido;
 		
+	}
+
+
+
+	public Object getId(String ID) {
+		// TODO Auto-generated method stub
+		return ID;
 	}
 	
 	

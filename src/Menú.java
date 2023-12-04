@@ -8,7 +8,9 @@ public class Menú {
 	
 	Profesor[] vectorProfesor;
 	Alumno[] vectorAlumno;
-	
+	boolean clasellena = false;
+	int contadorAlumnos;
+	int contadorProfesores;
 	
 	public Menú() {
 			profesores = new Profesor(null, null, null, null, null, null, null);
@@ -94,6 +96,8 @@ public class Menú {
 		}
 			
 			public void opcionAlumno() {
+				boolean volver = false;
+				do {
 				System.out.println("--------------------------------------------");
 				System.out.println("ALUMNOS:");
 				System.out.println("--------------------------------------------");
@@ -108,59 +112,66 @@ public class Menú {
 				switch(opcion1) {
 				case 1:
 					añadirAlumno();
+					break;
 				case 2:
-					consultarProfesor();
+					consultarAlumno();
+					break;
 				case 3:
-					main(null);
+					volver = true;
+					break;
 				}
 			
-			
+				}while(!volver);
 			
 
 		
 		
 		
 	}
-			public String añadirProfesor() {
+		
+		private void consultarAlumno() {
+			System.out.println("--------------------------------------------");
+			System.out.println("Listado de alumnos:");
+			System.out.println("--------------------------------------------");
+			for (int i = 0; i < vectorAlumno.length; i++) {
+		        if (vectorAlumno[i] != null) {
+		            System.out.println((generarIdAlum()) + ". " + vectorAlumno[i].getNombre());
+		        }
+		    }
+			System.out.println("Escoger alumno (0: Volver al menú anterior):");
+			System.out.println("OPCION:");
+			
+			Scanner sc4 = new Scanner(System.in);
+			int elegirAlum = sc4.nextInt();
+			
+			switch(elegirAlum) {
+			case 0:
+				opcionAlumno();
+	        default:
+	            if (elegirAlum > 0 && elegirAlum <= vectorAlumno.length && vectorAlumno[elegirAlum - 1] != null) {
+	                System.out.println("--------------------------------------------");
+	                System.out.println("Detalles del profesor seleccionado:");
+	                System.out.println("--------------------------------------------");
+	                System.out.println("Nombre: " + vectorAlumno[elegirAlum - 1].getNombre());
+	                System.out.println("Apellido: " + vectorAlumno[elegirAlum - 1].getApellido());
+	                System.out.println("Email: " + vectorAlumno[elegirAlum - 1].getEmail());
+	                System.out.println("Teléfono: " + vectorAlumno[elegirAlum - 1].getTlfAlumno());
+	            } else {
+	                System.out.println("Opción no válida");
+	            }
+	            break;
+	    }
+	}
 
-
-				System.out.println("Introduzca el nombre del profesor (MAX 30 caracteres):");
-				Scanner nom = new Scanner(System.in);
-				nuevoProfesor.nombre = nom.next();
-				System.out.println("Nombre: " + nuevoProfesor.nombre);
-				System.out.println("Introduzca el primer apellido del profesor (MAX 40 caracteres): ");
-				Scanner ape = new Scanner(System.in);
-				nuevoProfesor.apellido = ape.next();
-				System.out.println("Apellido: " + nuevoProfesor.apellido);
-				System.out.println("Introduzca el segundo apellido del profesor (opcional):");
-				Scanner ape2 = new Scanner(System.in);	
-				nuevoProfesor.apellido2 = ape.next();
-				System.out.println("Segundo apellido: " + nuevoProfesor.apellido2);
-				Scanner em = new Scanner(System.in);
-				System.out.println("Introduzca el email del profesor (cadena@profesor.es):");
-				nuevoProfesor.email = em.next();
-				System.out.println("Email: " + nuevoProfesor.email);
-				System.out.println("Introduzca el teléfono del profesor ([6,7 o 9] y 8 números):");
-				nuevoProfesor.telefono = em.next();
-				System.out.println("Telefono: " + nuevoProfesor.telefono);
-				Scanner id = new Scanner(System.in);
-				System.out.println("Introduzca el ID del profesor (cadena@profesor.es):");
-				nuevoProfesor.email = id.next();
-				Scanner dni = new Scanner(System.in);
-				System.out.println("Introduzca el dni del profesor (cadena@profesor.es):");
-				nuevoProfesor.email = dni.next();
-				return nuevoProfesor.nombre;
-				}
-				
-				
-			
-			
-			
 		public void consultarProfesor() {
 			System.out.println("--------------------------------------------");
 			System.out.println("Listado de profesores:");
 			System.out.println("--------------------------------------------");
-
+			for (int i = 0; i < vectorProfesor.length; i++) {
+		        if (vectorProfesor[i] != null) {
+		            System.out.println((generarIdProf()) + ". " + vectorProfesor[i].getNombre());
+		        }
+		    }
 			System.out.println("Escoger profesor (0: Volver al menú anterior):");
 			System.out.println("OPCION:");
 			
@@ -171,13 +182,23 @@ public class Menú {
 			case 0:
 				Menú menu = new Menú();
 				menu.opcionProfesor();
-			case 1:
-				profesores.profesor1();
-			}
-		}
+	        default:
+	            if (elegirProf > 0 && elegirProf <= vectorProfesor.length && vectorProfesor[elegirProf - 1] != null) {
+	                System.out.println("--------------------------------------------");
+	                System.out.println("Detalles del profesor seleccionado:");
+	                System.out.println("--------------------------------------------");
+	                System.out.println("Nombre: " + vectorProfesor[elegirProf - 1].getNombre());
+	                System.out.println("Apellido: " + vectorProfesor[elegirProf - 1].getApellido());
+	                System.out.println("Email: " + vectorProfesor[elegirProf - 1].getEmail());
+	                System.out.println("Teléfono: " + vectorProfesor[elegirProf - 1].getTlfProfesor());
+	            } else {
+	                System.out.println("Opción no válida");
+	            }
+	            break;
+	    }
+	}
 		
 		public void pedirDatosProfesor() {
-				espacioVector();
 				profesores.getNombre();
 				profesores.getApellido();
 				profesores.getEmail();
@@ -185,8 +206,20 @@ public class Menú {
 				int huecoVectorProfesores = espacioVector();
 				
 				if(huecoVectorProfesores<vectorProfesor.length) {
-					this.vectorProfesor[huecoVectorProfesores] = nuevoProfesor;
-		
+					
+					Profesor nuevoProfesor = new Profesor(null, null, null, null, null, null, null);
+					String nuevoId;
+					int intentos = 0;
+			        do {
+			            nuevoId = generarIdProf();
+			            System.out.println("Intento " + (intentos + 1) + ": Nuevo ID generado: " + nuevoId);
+			            
+			            if (++intentos > 10) {
+			               
+			                System.out.println("¡Error! Bucle infinito detectado. Saliendo.");
+			                return;
+			            }
+			        } while (idProfesorExistente(nuevoId));
 					
 					System.out.println("Introduzca el nombre del profesor (MAX 30 caracteres):");
 					Scanner nom = new Scanner(System.in);
@@ -210,7 +243,7 @@ public class Menú {
 					System.out.println("Telefono: " + nuevoProfesor.telefono);
 					nuevoProfesor.setNombre(nuevoProfesor.nombre);
 					nuevoProfesor.setPrimerApellido(nuevoProfesor.apellido);
-					
+					this.vectorProfesor[huecoVectorProfesores] = nuevoProfesor;
 					return;
 					
 				}
@@ -224,15 +257,12 @@ public class Menú {
 			Alumnos.getApellido();
 			Alumnos.getEmail();
 			Alumnos.getTlfAlumno();
-			espacioVector();
 			int huecoVectorAlumno = espacioVector();
 			
 			if(huecoVectorAlumno<vectorAlumno.length) {
-				this.vectorAlumno[huecoVectorAlumno] = nuevoAlumno;
-	
-
+				Alumno nuevoAlumno = new Alumno(null, null, null, null, null, null, null, null);
 			
-			
+				
 			System.out.println("Introduzca el nombre del alumno (MAX 30 caracteres):");
 			Scanner nom = new Scanner(System.in);
 			nuevoAlumno.nombre = nom.next();
@@ -252,8 +282,35 @@ public class Menú {
 			System.out.println("Introduzca el teléfono del alumno ([6,7 o 9] y 8 números):");
 			nuevoAlumno.email = em.next();
 			System.out.println("Telefono: " + nuevoAlumno.email);
+			this.vectorAlumno[huecoVectorAlumno] = nuevoAlumno;
 			}
 		}
+		
+		private String generarIdProf() {
+	        return String.format("PROF%04d", contadorProfesores++);
+	    }
+		
+		private String generarIdAlum() {
+	        return String.format("ALUM%04d", contadorAlumnos++);
+	    }
+		
+		private boolean idProfesorExistente(String ID) {
+	        for (Profesor profesor : vectorProfesor) {
+	            if (profesor != null && profesor.getId(ID).equals(ID)) {
+	                return true;
+	            }
+	        }
+	        return false;
+	    }
+		
+		private boolean idAlumnoExistente(String ID) {
+	        for (Alumno alumnos : vectorAlumno) {
+	            if (alumnos != null && alumnos.getId(ID).equals(ID)) {
+	                return true;
+	            }
+	        }
+	        return false;
+	    }
 		
 		private int espacioVector() {
 			int huecoVector = 0;
@@ -261,9 +318,6 @@ public class Menú {
 				if(vectorProfesor[i]== null) {
 					huecoVector = i;
 					break;
-				}
-				else {
-					System.out.println("La clase está llena");
 				}
 			}
 			return huecoVector;
