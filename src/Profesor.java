@@ -23,9 +23,10 @@ public class Profesor {
 	        this.setIdProfesor(generarIdProfesor());
 	        this.setNombre(nombre);
 	        this.setPrimerApellido(apellido);
-	        this.setTelefono();
-	        this.setEmail();
-	        this.setNumeroDocumento();
+	        this.setSegundoApellido(apellido2);
+	        this.setTelefono(telefono);
+	        this.setEmail(email);
+	        this.setNumeroDocumento(numeroDocumento);
 	    	this.ID = ID;
 	    	this.nombre = nombre;
 	    	this.apellido = apellido;
@@ -45,8 +46,8 @@ public class Profesor {
 	}
 
 
-	private void setSegundoApellido(String string) {
-		// TODO Auto-generated method stub
+	void setSegundoApellido(String apellido2) {
+		this.apellido2 = apellido2;
 		
 	}
 
@@ -69,21 +70,20 @@ public class Profesor {
 	}
 
 
-	private void setNumeroDocumento() {
-		// TODO Auto-generated method stub
+	private void setNumeroDocumento(String numeroDocumento) {
+		this.numeroDocumento = numeroDocumento;
 		
 	}
 
 
-	private void setEmail() {
-		// TODO Auto-generated method stub
+	void setEmail(String email) {
+		this.email = email;
 		
 	}
 
 
-	private void setTelefono() {
-		// TODO Auto-generated method stub
-		
+	private void setTelefono(String telefono) {
+		this.telefono = telefono;			
 	}
 
 
@@ -124,7 +124,7 @@ public class Profesor {
 		System.out.println("Email: " + email);
 		System.out.println("Introduzca el teléfono del profesor ([6,7 o 9] y 8 números):");
 		this.email = em.next();
-		System.out.println("Telefono: " + email);
+		System.out.println("Telefono: " + telefono);
 		return nombre;
 	}
 	
