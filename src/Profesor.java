@@ -17,9 +17,13 @@ public class Profesor {
 	String email;
 	String telefono;
 	String numeroDocumento = "p";
+	Boolean esTutor;
+	String tutor;
+	int sueldo = 0;
+	int diasAsuntosPropios;
 	String numeroID[] = new String[] {"0","1","2","3","4"};
 	
-	 public Profesor(String ID, String nombre, String apellido,String apellido2, String email, String telefono, String numeroDocumento) {
+	 public Profesor(String ID, String nombre, String apellido,String apellido2, String email, String telefono, String numeroDocumento, int diasAsuntosPropios, int sueldo) {
 	        this.setIdProfesor(generarIdProfesor());
 	        this.setNombre(nombre);
 	        this.setPrimerApellido(apellido);
@@ -27,6 +31,8 @@ public class Profesor {
 	        this.setTelefono(telefono);
 	        this.setEmail(email);
 	        this.setNumeroDocumento(numeroDocumento);
+	        this.setSueldo(sueldo);
+	        this.setDiasAsuntosPropios(diasAsuntosPropios);
 	    	this.ID = ID;
 	    	this.nombre = nombre;
 	    	this.apellido = apellido;
@@ -34,6 +40,8 @@ public class Profesor {
 	    	this.email = email;
 	    	this.telefono = telefono;
 	    	this.numeroDocumento = numeroDocumento;
+	    	this.sueldo = sueldo;
+	    	this.diasAsuntosPropios = diasAsuntosPropios;
 	        
 	  
 	    }
@@ -52,25 +60,25 @@ public class Profesor {
 	}
 
 
-	private void setDiasAsuntosPropios(int diasAsuntosPropios) {
-		// TODO Auto-generated method stub
+	void setDiasAsuntosPropios(int nextInt) {
+		this.diasAsuntosPropios = nextInt;
 		
 	}
 
 
-	private void setSueldo(double sueldo) {
-		// TODO Auto-generated method stub
+	void setSueldo(int sueldo) {
+		this.sueldo = sueldo;
 		
 	}
 
 
-	private void setEsTutor(boolean esTutor) {
-		// TODO Auto-generated method stub
+	void setEsTutor(boolean esTutor) {
+		this.esTutor = esTutor;
 		
 	}
 
 
-	private void setNumeroDocumento(String numeroDocumento) {
+	void setNumeroDocumento(String numeroDocumento) {
 		this.numeroDocumento = numeroDocumento;
 		
 	}
@@ -128,22 +136,7 @@ public class Profesor {
 		return nombre;
 	}
 	
-	
-		void profesor1() {
-		System.out.println("--------------------------------------------");
-		System.out.println("INFO PROFESOR:");
-		System.out.println("ID: " + ID);
-		System.out.println("Nombre: " + nombre1);
-		System.out.println("--------------------------------------------");
-	}
-	
-	public String setNombreProfesor() {
-		nombre = "pepe";
-		return nombre;
-	}
 
-
-	
 	public String getIdProfesor() {
 		return ID;
 	}
@@ -180,6 +173,32 @@ public class Profesor {
 		// TODO Auto-generated method stub
 		return ID;
 	}
+
+
+
+	public int getDiasAsusntos() {
+		return diasAsuntosPropios;
+	}
+
+
+
+	public int getSueldo() {
+		return sueldo;
+	}
+
+
+
+	public String getEsTutor() {
+		return tutor;
+	}
+
+
+
+	public String getNumeroDocumento() {
+		return numeroDocumento;
+	}
+
+
 	
 	
 	

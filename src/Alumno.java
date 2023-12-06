@@ -14,9 +14,10 @@ public class Alumno {
 	String email;
 	String telefono;
 	String numeroDocumento;
+	String ciclo;
 	String numeroID[] = new String[] {"0","1","2","3","4"};
 	
-	 public Alumno(String nombre, String primerApellido, String telefono, String email, String numeroDocumento, String ID, String apellido2, String apellido) {
+	 public Alumno(String nombre, String primerApellido, String telefono, String email, String numeroDocumento, String ID, String apellido2, String apellido, String ciclo) {
 	        this.setIdAlumno(generarIdAlumno());
 	        this.setNombre(nombre);
 	        this.setPrimerApellido(primerApellido);
@@ -24,6 +25,7 @@ public class Alumno {
 	        this.setEmail(email);
 	        this.setNumeroDocumento(numeroDocumento);
 	        this.setSegundoApellido(""); 
+	        this.setCiclo(ciclo);
 	        this.ID = ID;
 	    	this.nombre = nombre;
 	    	this.apellido = apellido;
@@ -31,6 +33,7 @@ public class Alumno {
 	    	this.email = email;
 	    	this.telefono = telefono;
 	    	this.numeroDocumento = numeroDocumento;
+	    	this.ciclo = ciclo;
 	    }
 	 
 	 private void setIdAlumno(Object generarIdAlumno) {
@@ -55,6 +58,7 @@ public class Alumno {
 			System.out.println("Introduzca el email del alumno (cadena@alumno.es):");
 			this.email = em.next();
 			System.out.println("Email: " + email);
+			
 			System.out.println("Introduzca el teléfono del alumno ([6,7 o 9] y 8 números):");
 			this.email = em.next();
 			System.out.println("Telefono: " + email);
@@ -62,8 +66,8 @@ public class Alumno {
 			return nombre;
 		}
 
-	private void setSegundoApellido(String string) {
-		// TODO Auto-generated method stub
+	void setSegundoApellido(String next) {
+		this.apellido2 = next;
 		
 	}
 
@@ -72,28 +76,28 @@ public class Alumno {
 		return null;
 	}
 
-	private void setNumeroDocumento(String numeroDocumento) {
-		// TODO Auto-generated method stub
+	void setNumeroDocumento(String next) {
+		this.numeroDocumento = next;
 		
 	}
 
-	private void setEmail(String email2) {
-		// TODO Auto-generated method stub
+	void setEmail(String next) {
+		this.email = next;
 		
 	}
 
-	private void setTelefono(String telefono) {
-		// TODO Auto-generated method stub
+	void setTelefono(String next) {
+		this.telefono = next;
 		
 	}
 
-	private void setPrimerApellido(String primerApellido) {
-		// TODO Auto-generated method stub
+	void setPrimerApellido(String next) {
+		this.apellido = next;
 		
 	}
 
-	private void setNombre(String nombre2) {
-		// TODO Auto-generated method stub
+	void setNombre(String next) {
+		this.nombre = next;
 		
 	}
 
@@ -116,6 +120,19 @@ public class Alumno {
 	public Object getId(String ID) {
 		// TODO Auto-generated method stub
 		return ID;
+	}
+
+	public void setCiclo(String next) {
+		this.ciclo = next;
+		
+	}
+
+	public String getCiclo() {
+		return ciclo;
+	}
+
+	public String getNumeroDocumento() {
+		return numeroDocumento;
 	}
 
 }

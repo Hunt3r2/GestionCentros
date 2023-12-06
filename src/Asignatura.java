@@ -8,13 +8,18 @@ public class Asignatura {
 	String notasAlumno;
 	private Profesor profesorAsignado;
 	
+	private class profAsig {
+		
+	}
+	
 	public static void main(String[] args) {
 		
 
 	}
 	
 	public Asignatura(String IDprof, String nombre, String codigo, String notasAlumno) {
-		
+		this.setNombre(nombre);
+		this.nombre = nombre;
 	}
 
 	public void setNombre(String next) {
