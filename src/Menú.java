@@ -383,7 +383,7 @@ public class Menú {
 			Alumnos.getApellido();
 			Alumnos.getEmail();
 			Alumnos.getTlfAlumno();
-			int huecoVectorAlumno = espacioVector();
+			int huecoVectorAlumno = espacioVectorAlumno();
 			
 			if(huecoVectorAlumno<vectorAlumno.length) {
 				Alumno nuevoAlumno = new Alumno(null, null, null, null, null, null, null, null, null);
@@ -398,7 +398,7 @@ public class Menú {
 			nuevoAlumno.setPrimerApellido(ape.next());
 			System.out.println("Apellido: " + nuevoAlumno.apellido);
 			System.out.println("Introduzca el segundo apellido del alumno (opcional):");
-			Scanner ape2 = new Scanner(System.in);	
+			Scanner ape2 = new Scanner(System.in);
 			nuevoAlumno.setSegundoApellido(ape.next());
 			System.out.println("Segundo apellido: " + nuevoAlumno.apellido);
 			Scanner em = new Scanner(System.in);
@@ -460,6 +460,17 @@ public class Menú {
 			int huecoVector = 0;
 			for (int i = 0;i<vectorProfesor.length;i++) {
 				if(vectorProfesor[i]== null) {
+					huecoVector = i;
+					break;
+				}
+			}
+			return huecoVector;
+		}
+		
+		private int espacioVectorAlumno() {
+			int huecoVector = 0;
+			for (int i = 0;i<vectorAlumno.length;i++) {
+				if(vectorAlumno[i]== null) {
 					huecoVector = i;
 					break;
 				}
