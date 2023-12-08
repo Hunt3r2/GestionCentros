@@ -2,8 +2,6 @@ import java.util.Scanner;
 
 public class Profesor {
 	
-	Menú menu;
-
 	public static void main(String[] args) {
 		
 		
@@ -21,6 +19,7 @@ public class Profesor {
 	String tutor;
 	int sueldo = 0;
 	int diasAsuntosPropios;
+	private static int contadorProfesor = 1;
 	String numeroID[] = new String[] {"0","1","2","3","4"};
 	
 	 public Profesor(String ID, String nombre, String apellido,String apellido2, String email, String telefono, String numeroDocumento, int diasAsuntosPropios, int sueldo) {
@@ -42,15 +41,14 @@ public class Profesor {
 	    	this.numeroDocumento = numeroDocumento;
 	    	this.sueldo = sueldo;
 	    	this.diasAsuntosPropios = diasAsuntosPropios;
-	        
+	        this.ID = generarIdProfesor();
 	  
 	    }
 	 
 
 	
-	private void setIdProfesor(Object generarIdProfesor) {
-		// TODO Auto-generated method stub
-		
+	private void setIdProfesor() {
+		this.ID = generarIdProfesor();
 	}
 
 
@@ -107,39 +105,10 @@ public class Profesor {
 	}
 
 
-	private Object generarIdProfesor() {
-		// TODO Auto-generated method stub
-		return null;
-	}
-
-
-	public String añadirProfesor() {
-		System.out.println("Introduzca el nombre del profesor (MAX 30 caracteres):");
-		Scanner nom = new Scanner(System.in);
-		this.nombre = nom.next();
-		System.out.println("Nombre: " + nombre);
-		System.out.println("Introduzca el primer apellido del profesor (MAX 40 caracteres): ");
-		Scanner ape = new Scanner(System.in);
-		this.apellido = ape.next();
-		System.out.println("Apellido: " + apellido);
-		System.out.println("Introduzca el segundo apellido del profesor (opcional):");
-		Scanner ape2 = new Scanner(System.in);	
-		this.apellido = ape.next();
-		System.out.println("Segundo apellido: " + apellido);
-		Scanner em = new Scanner(System.in);
-		System.out.println("Introduzca el email del profesor (cadena@profesor.es):");
-		this.email = em.next();
-		System.out.println("Email: " + email);
-		System.out.println("Introduzca el teléfono del profesor ([6,7 o 9] y 8 números):");
-		this.email = em.next();
-		System.out.println("Telefono: " + telefono);
-		return nombre;
-	}
-	
-
-	public String getIdProfesor() {
-		return ID;
-	}
+	public static String generarIdProfesor() {
+        String nuevoId = String.format("PROF%04d", contadorProfesor++);
+        return nuevoId;
+    }
 	
 	public void setIdProfesor(String idProfesor) {
 		this.ID = ID;
@@ -169,8 +138,7 @@ public class Profesor {
 
 
 
-	public Object getId(String ID) {
-		// TODO Auto-generated method stub
+	public String getId() {
 		return ID;
 	}
 
@@ -197,6 +165,19 @@ public class Profesor {
 	public String getNumeroDocumento() {
 		return numeroDocumento;
 	}
+
+
+
+	public String getNombreCompleto() {
+		return nombre + " " + apellido;
+	}
+
+
+
+	public void setId(String ID) {
+        this.ID = ID;
+    }
+
 
 
 	

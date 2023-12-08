@@ -12,21 +12,20 @@ public class Menú {
 	Asignatura[] vectorAsignatura;
 	boolean clasellena = false;
 	int contadorAlumnos;
-	int contadorProfesores;
+	static int contadorProfesores;
 	
 	public Menú() {
 			profesores = new Profesor(null, null, null, null, null, null, null, 0, 0);
 			this.vectorProfesor = new Profesor[2];
 			Alumnos = new Alumno(null, null, null, null, null, null, null, null, null);
 			this.vectorAlumno = new Alumno[2];
-			Asignaturas = new Asignatura(null, null, null, null);
+			Asignaturas = new Asignatura(null, null, null, null, null, 0);
 			this.vectorAsignatura = new Asignatura[2];
 			
 		}
 	
 	Profesor nuevoProfesor = new Profesor(null, null, null, null, null, null, null, 0, 0);		
 	Alumno nuevoAlumno = new Alumno(null, null, null, null, null, null, null, null, null);
-	Asignatura nuevaAsignatura = new Asignatura(null, null, null, null);
 
 	public static void main(String[] args) {
 		Menú menu;
@@ -105,6 +104,7 @@ public class Menú {
 			case 5:
 				break;
 			case 6:
+				borrarAsignatura();
 				break;
 			case 7:
 				break;
@@ -118,10 +118,20 @@ public class Menú {
 
 
 		private void consultarAsignaturas() {
+			boolean hayAsignaturas = false;
+			
 			for (int i = 0; i < vectorAsignatura.length; i++) {
 		        if (vectorAsignatura[i] != null) {
-		            System.out.println(i + 1 + ". " + vectorAsignatura[i].getNombre());
+		            System.out.println(Asignaturas.generarIdAsignatura(i) + ". " + vectorAsignatura[i].getNombre());
+		            hayAsignaturas = true;
 		        }
+			}
+			
+			if (!hayAsignaturas) {
+	            System.out.println("No hay asignaturas disponibles.");
+	            return;
+	        }
+		        
 		        System.out.println("Escoger asignatura (0: Volver al menú anterior):");
 				System.out.println("OPCION:");
 				
@@ -134,29 +144,34 @@ public class Menú {
 		        default:
 		            if (elegirAsig > 0 && elegirAsig <= vectorAsignatura.length && vectorAsignatura[elegirAsig - 1] != null) {
 		                System.out.println("--------------------------------------------");
-		                System.out.println("Detalles del profesor seleccionado:");
+		                System.out.println("Detalles de la asignatura seleccionada:");
 		                System.out.println("--------------------------------------------");
 		                System.out.println("Nombre: " + vectorAsignatura[elegirAsig - 1].getNombre());
-		                System.out.println("Codigo: " + vectorAsignatura[elegirAsig - 1].getCodigo());
-		                System.out.println("Profesor: " + vectorAsignatura[elegirAsig - 1].getProfesorAsignado());
+		                System.out.println("Codigo: " + vectorAsignatura[elegirAsig - 1].getId());
+		                Profesor profesorAsignado = vectorAsignatura[elegirAsig - 1].getProfesorAsignado();
+		                if (profesorAsignado != null) {
+		                System.out.println("Profesor: " + vectorAsignatura[elegirAsig - 1].getProfesorAsignado().getNombreCompleto());
 		                System.out.println("Alumnos: " + vectorAsignatura[elegirAsig - 1].getNotasAlumnos());
+		                }else {
+		                    System.out.println("Profesor no asignado");
+		                }
 		            } else {
 		                System.out.println("Opción no válida");
 		            }
 		            break;
 		    }
-		    }
+		    
 			
 		}
 
 
 		private void añadirAsignatura() {
-			espacioVectorAsignatura();
 			int huecoVectorAsignatura = espacioVectorAsignatura();
-			Asignatura Asiganutas = new Asignatura(null, null, null, null);
+			Asignatura nuevaAsignatura = new Asignatura(null, null, null, null, null, 0);
+			
 			System.out.println("Introduzca el nombre de la asignatura (MAX 70 caracteres):");
 			Scanner nom = new Scanner(System.in);
-			nuevaAsignatura.nombre = nom.next();
+			nuevaAsignatura.setNombre(nom.next());
 			this.vectorAsignatura[huecoVectorAsignatura] = nuevaAsignatura;
 			return;
 			
@@ -229,13 +244,21 @@ public class Menú {
 	}
 		
 		private void consultarAlumno() {
+	        boolean hayAlumnos = false;
+
 			System.out.println("--------------------------------------------");
 			System.out.println("Listado de alumnos:");
 			System.out.println("--------------------------------------------");
 			for (int i = 0; i < vectorAlumno.length; i++) {
 		        if (vectorAlumno[i] != null) {
 		            System.out.println("ALUM000" + (i + 1) + ". " + vectorAlumno[i].getNombre());
+		            hayAlumnos = true;
 		        }
+		        if (!hayAlumnos) {
+		            System.out.println("No hay alumnos disponibles.");
+		            return;
+		        }
+		        
 		    }
 			System.out.println("Escoger alumno (0: Volver al menú anterior):");
 			System.out.println("OPCION:");
@@ -271,13 +294,23 @@ public class Menú {
 	}
 
 		public void consultarProfesor() {
+	        boolean hayProfesores = false;
+
 			System.out.println("--------------------------------------------");
 			System.out.println("Listado de profesores:");
 			System.out.println("--------------------------------------------");
 			for (int i = 0; i < vectorProfesor.length; i++) {
 		        if (vectorProfesor[i] != null) {
-		            System.out.println("PROF000" + (i + 1) + ". " + vectorProfesor[i].getNombre() + " " +  vectorProfesor[i].getApellido());
+		            System.out.println(vectorProfesor[i].getId() + ". " + vectorProfesor[i].getNombreCompleto());
+	                hayProfesores = true;
+
 		        }
+		        
+		        if (!hayProfesores) {
+		            System.out.println("No hay profesores disponibles.");
+		            return;
+		        }
+		        
 		    }
 			System.out.println("Escoger profesor (0: Volver al menú anterior):");
 			System.out.println("OPCION:");
@@ -294,6 +327,7 @@ public class Menú {
 	                System.out.println("--------------------------------------------");
 	                System.out.println("Detalles del profesor seleccionado:");
 	                System.out.println("--------------------------------------------");
+	                System.out.println("ID: " + vectorProfesor[elegirProf - 1].getId());
 	                System.out.println("Nombre: " + vectorProfesor[elegirProf - 1].getNombre());
 	                System.out.println("Apellido: " + vectorProfesor[elegirProf - 1].getApellido());
 	                System.out.println("Email: " + vectorProfesor[elegirProf - 1].getEmail());
@@ -322,7 +356,8 @@ public class Menú {
 				profesores.getTlfProfesor();
 				int huecoVectorProfesores = espacioVector();
 				Profesor nuevoProfesor = new Profesor(null, null, null, null, null, null, null, 0, 0);
-				
+			    nuevoProfesor.setId(Profesor.generarIdProfesor());
+
 					
 					System.out.println("Introduzca el nombre del profesor (MAX 30 caracteres):");
 					Scanner nom = new Scanner(System.in);
@@ -369,6 +404,7 @@ public class Menú {
 					nuevoProfesor.setNombre(nuevoProfesor.nombre);
 					nuevoProfesor.setPrimerApellido(nuevoProfesor.apellido);
 					this.vectorProfesor[huecoVectorProfesores] = nuevoProfesor;
+					contadorProfesores++;
 					return;
 					
 				}
@@ -430,13 +466,14 @@ public class Menú {
 			}while(!volver);
 		}
 		
-		private String generarIdProf() {
-	        return String.format("PROF%04d", contadorProfesores++);
-	    }
-		
 		private String generarIdAlum() {
 	        return String.format("ALUM%04d", contadorAlumnos++);
 	    }
+		
+		private String generarIdProfesor() {
+		    return String.format("PROF%04d", contadorProfesores);
+		}
+
 		
 		private boolean idProfesorExistente(String ID) {
 	        for (Profesor profesor : vectorProfesor) {
@@ -492,18 +529,24 @@ public class Menú {
 		private void asignarProfesorAsignatura() {
 		    consultarAsignaturas();
 		    System.out.println("Seleccione el número de la asignatura a la que desea asignar un profesor:");
-		    Scanner sc = new Scanner(System.in);
-		    int numAsignatura = sc.nextInt()-1;
+		    Scanner asig = new Scanner(System.in);
+		    int numAsignatura = asig.nextInt();
 
 
 		    if (numAsignatura > 0 && numAsignatura <= vectorAsignatura.length && vectorAsignatura[numAsignatura - 1] != null) {
 		        consultarProfesor();
+		        for (int i = 0; i < vectorProfesor.length; i++) {
+		            if (vectorProfesor[i] != null) {
+		                System.out.println(i + 1 + ". " + vectorProfesor[i].getNombreCompleto());
+		            }
+		        }
 
 		        System.out.println("Seleccione el número del profesor que desea asignar a la asignatura:");
-		        int numProfesor = sc.nextInt();
+		        int numProfesor = asig.nextInt();
 
 		        if (numProfesor > 0 && numProfesor <= vectorProfesor.length && vectorProfesor[numProfesor - 1] != null) {
-		            vectorAsignatura[numAsignatura - 1].setProfesorAsignado(vectorProfesor[numProfesor - 1]);
+		        	Profesor profesorSeleccionado = vectorProfesor[numProfesor - 1];
+		            vectorAsignatura[numAsignatura - 1].setProfesorAsignado(profesorSeleccionado);
 		            System.out.println("Profesor asignado correctamente a la asignatura.");
 		        } else {
 		            System.out.println("Número de profesor no válido.");
@@ -511,6 +554,36 @@ public class Menú {
 		    } else {
 		        System.out.println("Número de asignatura no válido.");
 		    }
+		}
+		
+		private void borrarAsignatura() {
+		    System.out.println("--------------------------------------------");
+		    System.out.println("Listado de asignaturas:");
+		    System.out.println("--------------------------------------------");
+
+		    for (int i = 0; i < vectorAsignatura.length; i++) {
+		        if (vectorAsignatura[i] != null) {
+		            System.out.println(i + 1 + ". " + vectorAsignatura[i].getNombre());
+		        }
+		    }
+
+		    if (vectorAsignatura[0] == null) {
+		        System.out.println("No hay asignaturas disponibles para borrar.");
+		        return;
+		    }
+
+		    System.out.println("Seleccione el número de la asignatura que desea borrar (0 para volver):");
+		    Scanner scanner = new Scanner(System.in);
+		    int numAsignatura = scanner.nextInt();
+
+		    if (numAsignatura == 0) {
+		        return;
+		    }
+
+		    vectorAsignatura[numAsignatura - 1] = null;
+
+
+		    System.out.println("Asignatura borrada correctamente.");
 		}
 
 		
