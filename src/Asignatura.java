@@ -53,9 +53,8 @@ public class Asignatura {
 		return null;
 	}
 
-	public String getNotasAlumnos() {
-		// TODO Auto-generated method stub
-		return null;
+	public double[] getNotasAlumnos() {
+		return notasAlumno;
 	}
 
 	public String getId() {
@@ -77,29 +76,65 @@ public class Asignatura {
         } else {
             System.out.println("No hay espacio para más alumnos en la asignatura.");
         }
-    }
-
-	public void getAlumnosMatriculados() {
-	    if (contadorAlumnosMatriculados > 0) {
-	        for (int i = 0; i < contadorAlumnosMatriculados; i++) {
-	            System.out.println("- " + alumnosMatriculados[i].getId());
-	        }
-	    } else {
-	        System.out.println("No hay alumnos matriculados en esta asignatura.");
-	    }
-	}
-	
-	public void obtenerNotas() {
-        for (Alumno alumno : alumnosMatriculados) {
-            if (alumno != null) {
-                System.out.print(alumno.getNombreCompleto() + ": ");
-                notasAlumno = alumno.getNotas();
-                for (Double nota : notasAlumno) {
-                    System.out.print(nota + " ");
-                }
-                System.out.println();
+        for (int i = 0; i < alumnosMatriculados.length; i++) {
+            if (alumnosMatriculados[i] == null) {
+                alumnosMatriculados[i] = alumno;
+                // Agrega la asignatura a las matriculadas por el alumno
+                alumno.matricularEnAsignatura(this);
+                break;
             }
         }
     }
+
+	public void getAlumnosMatriculados() {
+		for (int i = 0; i < contadorAlumnosMatriculados; i++) {
+			if (alumnosMatriculados[i].getNombre() == null) {
+					if (contadorAlumnosMatriculados > 0) {
+			        for (int a = 0; a < contadorAlumnosMatriculados; a++) {
+			            System.out.println("- " + alumnosMatriculados[a].getNombre());
+			            for (Alumno alumno : alumnosMatriculados) {
+			                if (alumno != null) {
+			                    System.out.println(alumno.getId() + ". " + alumno.getNombreCompleto() +
+			                            " - Nota: " + alumno.getNotas(a));
+			                }
+			            }
+			            
+			        }
+			    } else {
+			        System.out.println("No hay alumnos matriculados en esta asignatura.");
+			    }
+			}else {
+		        System.out.println("No hay alumnos matriculados en esta asignatura.");
+		    }
+			}
+		}
+	    
+	
+	public void desmatricularAlumno(Alumno alumno) {
+        for (int i = 0; i < alumnosMatriculados.length; i++) {
+            if (alumnosMatriculados[i] != null && alumnosMatriculados[i].equals(alumno)) {
+                // Desmatricular al alumno de la asignatura
+                alumnosMatriculados[i] = null;
+
+                // Desmatricular la asignatura del alumno
+                alumno.desmatricularDeAsignatura(this);
+
+                System.out.println("Alumno desmatriculado correctamente de la asignatura.");
+                return;
+            }
+        }
+        System.out.println("El alumno no está matriculado en esta asignatura.");
+    }
+	
+	public void consultarAlumnosMatriculados() {
+        System.out.println("Alumnos matriculados en la asignatura:");
+        for (int i = 0; i < alumnosMatriculados.length; i++) {
+            if (alumnosMatriculados[i] != null) {
+                System.out.println(alumnosMatriculados[i].getId() + ". " + alumnosMatriculados[i].getNombreCompleto());
+            }
+        }
+    }
+
+	
 
 }

@@ -111,6 +111,7 @@ public class Menú {
 				borrarAsignatura();
 				break;
 			case 7:
+				desmatricularAlumnoAsignatura();
 				break;
 			case 8:
 				volver = true;
@@ -157,11 +158,7 @@ public class Menú {
 		                System.out.println("Profesor: " + vectorAsignatura[elegirAsig - 1].getProfesorAsignado().getId());
 		                System.out.println("Alumnos: " );
 		                vectorAsignatura[elegirAsig - 1].getAlumnosMatriculados();
-		                if (vectorAsignatura[elegirAsig - 1].getNotasAlumnos() != null) {
-		                	System.out.println("Nota: " + vectorAsignatura[elegirAsig - 1].getNotasAlumnos());
-		                }else {
-		                	System.out.println("Sin nota registrada.");
-		                }
+		            
 		                }else {
 		                    System.out.println("Profesor no asignado");
 		                }
@@ -634,6 +631,7 @@ public class Menú {
 		    } else {
 		        System.out.println("Número de alumno no válido.");
 		    }
+		    
 		}
 		
 		public void agregarNota() {
@@ -665,7 +663,6 @@ public class Menú {
 		            // Solicitar la nota al usuario
 		            System.out.println("Ingrese la nota (>=0 && <=10):");
 		            double nota = new Scanner(System.in).nextDouble();
-
 		            // Validar la nota
 		            if (nota >= 0 && nota <= 10) {
 		                // Agregar la nota al alumno en la asignatura seleccionada
@@ -681,6 +678,47 @@ public class Menú {
 		        System.out.println("Número de alumno no válido.");
 		    }
 		}
+		
+		private void desmatricularAlumnoAsignatura() {
+		    // Mostrar la lista de alumnos matriculados en todas las asignaturas
+		    System.out.println("Seleccione el número del alumno que desea desmatricular de una asignatura:");
+		    for (int i = 0; i < vectorAlumno.length; i++) {
+		        if (vectorAlumno[i] != null) {
+		            System.out.println((i + 1) + ". " + vectorAlumno[i].getNombreCompleto());
+		        }
+		    }
+
+		    int numAlumno = new Scanner(System.in).nextInt();
+
+		    if (numAlumno > 0 && numAlumno <= vectorAlumno.length && vectorAlumno[numAlumno - 1] != null) {
+		        // Seleccionar el alumno
+		        Alumno alumnoSeleccionado = vectorAlumno[numAlumno - 1];
+
+		        // Mostrar la lista de asignaturas en las que está matriculado el alumno
+		        System.out.println("El alumno está matriculado en las siguientes asignaturas:");
+		        Asignatura[] asignaturasMatriculadas = alumnoSeleccionado.getAsignaturasMatriculadas();
+		        for (int i = 0; i < asignaturasMatriculadas.length; i++) {
+		            if (asignaturasMatriculadas[i] != null) {
+		                System.out.println((i + 1) + ". " + asignaturasMatriculadas[i].getNombre());
+		            }
+		        }
+
+		        System.out.println("Seleccione el número de la asignatura de la que desea desmatricular al alumno:");
+		        int numAsignatura = new Scanner(System.in).nextInt();
+
+		        if (numAsignatura > 0 && numAsignatura <= asignaturasMatriculadas.length &&
+		            asignaturasMatriculadas[numAsignatura - 1] != null) {
+		            // Desmatricular al alumno de la asignatura seleccionada
+		            asignaturasMatriculadas[numAsignatura - 1].desmatricularAlumno(alumnoSeleccionado);
+		            System.out.println("Alumno desmatriculado correctamente de la asignatura.");
+		        } else {
+		            System.out.println("Número de asignatura no válido o el alumno no está matriculado en esa asignatura.");
+		        }
+		    } else {
+		        System.out.println("Número de alumno no válido.");
+		    }
+		}
+
 
 
 

@@ -17,6 +17,8 @@ public class Alumno {
 	String ciclo;
 	private static int contadorAlumno = 1;
 	double[] notas;
+    private Asignatura[] asignaturasMatriculadas;
+
 	String numeroID[] = new String[] {"0","1","2","3","4"};
 	
 	 public Alumno(String nombre, String primerApellido, String telefono, String email, String numeroDocumento, String ID, String apellido2, String apellido, String ciclo) {
@@ -36,6 +38,8 @@ public class Alumno {
 	    	this.numeroDocumento = numeroDocumento;
 	    	this.ciclo = ciclo;
 	    	this.notas = new double[4];
+	        this.asignaturasMatriculadas = new Asignatura[4]; 
+
 	    }
 	 
 
@@ -119,16 +123,15 @@ public class Alumno {
 
 
 
-	public double[] getNotas() {
-		return notas;
-	}
+	public double getNotas(int indiceAsignatura) {
+        return notas[indiceAsignatura];
+    }
 
 
 
-	public void setNotas() {
-		this.notas = notas;
-	}
-
+	public void setNotas(int indiceAsignatura, double nota) {
+        notas[indiceAsignatura] = nota;
+    }
 
 
 	public void agregarNota(double nota, int indiceAsignatura) {
@@ -136,7 +139,6 @@ public class Alumno {
         if (indiceAsignatura >= 0 && indiceAsignatura < notas.length) {
             // Asegurarse de que la nota está dentro del rango permitido
             if (nota >= 0 && nota <= 10) {
-                // Asignar la nota al índice correspondiente
                 notas[indiceAsignatura] = nota;
             } else {
                 System.out.println("La nota ingresada no es válida. Debe estar entre 0 y 10.");
@@ -145,6 +147,31 @@ public class Alumno {
             System.out.println("Índice de asignatura no válido.");
         }
     }
+	
+	public Asignatura[] getAsignaturasMatriculadas() {
+        return asignaturasMatriculadas;
+    }
+	
+	public void matricularEnAsignatura(Asignatura asignatura) {
+        // Verifica si hay espacio en el array antes de matricular al alumno
+        for (int i = 0; i < asignaturasMatriculadas.length; i++) {
+            if (asignaturasMatriculadas[i] == null) {
+                asignaturasMatriculadas[i] = asignatura;
+                break;
+            }
+        }
+    }
+	
+	public void desmatricularDeAsignatura(Asignatura asignatura) {
+        for (int i = 0; i < asignaturasMatriculadas.length; i++) {
+            if (asignaturasMatriculadas[i] != null && asignaturasMatriculadas[i].equals(asignatura)) {
+                // Desmatricular la asignatura del alumno
+                asignaturasMatriculadas[i] = null;
+                return;
+            }
+        }
+    }
+	
 	
 
 }
