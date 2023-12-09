@@ -15,10 +15,10 @@ public class Alumno {
 	String telefono;
 	String numeroDocumento;
 	String ciclo;
+	private static int contadorAlumno = 1;
 	String numeroID[] = new String[] {"0","1","2","3","4"};
 	
 	 public Alumno(String nombre, String primerApellido, String telefono, String email, String numeroDocumento, String ID, String apellido2, String apellido, String ciclo) {
-	        this.setIdAlumno(generarIdAlumno());
 	        this.setNombre(nombre);
 	        this.setPrimerApellido(primerApellido);
 	        this.setTelefono(telefono);
@@ -36,10 +36,6 @@ public class Alumno {
 	    	this.ciclo = ciclo;
 	    }
 	 
-	 private void setIdAlumno(Object generarIdAlumno) {
-		// TODO Auto-generated method stub
-		
-	}
 
 	public String añadirAlumno() {
 			System.out.println("Introduzca el nombre del alumno (MAX 30 caracteres):");
@@ -117,8 +113,7 @@ public class Alumno {
 		return telefono;		
 	}
 
-	public Object getId(String ID) {
-		// TODO Auto-generated method stub
+	public String getId() {
 		return ID;
 	}
 
@@ -133,6 +128,11 @@ public class Alumno {
 
 	public String getNumeroDocumento() {
 		return numeroDocumento;
+	}
+
+	public void setId(String ID) {
+        this.ID = ID;
+		
 	}
 
 }

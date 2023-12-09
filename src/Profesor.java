@@ -23,7 +23,6 @@ public class Profesor {
 	String numeroID[] = new String[] {"0","1","2","3","4"};
 	
 	 public Profesor(String ID, String nombre, String apellido,String apellido2, String email, String telefono, String numeroDocumento, int diasAsuntosPropios, int sueldo) {
-	        this.setIdProfesor(generarIdProfesor());
 	        this.setNombre(nombre);
 	        this.setPrimerApellido(apellido);
 	        this.setSegundoApellido(apellido2);
@@ -32,7 +31,6 @@ public class Profesor {
 	        this.setNumeroDocumento(numeroDocumento);
 	        this.setSueldo(sueldo);
 	        this.setDiasAsuntosPropios(diasAsuntosPropios);
-	    	this.ID = ID;
 	    	this.nombre = nombre;
 	    	this.apellido = apellido;
 	    	this.apellido2 = apellido2;
@@ -41,15 +39,11 @@ public class Profesor {
 	    	this.numeroDocumento = numeroDocumento;
 	    	this.sueldo = sueldo;
 	    	this.diasAsuntosPropios = diasAsuntosPropios;
-	        this.ID = generarIdProfesor();
+	        this.ID = ID;
 	  
 	    }
 	 
 
-	
-	private void setIdProfesor() {
-		this.ID = generarIdProfesor();
-	}
 
 
 	void setSegundoApellido(String apellido2) {
@@ -104,11 +98,6 @@ public class Profesor {
 		
 	}
 
-
-	public static String generarIdProfesor() {
-        String nuevoId = String.format("PROF%04d", contadorProfesor++);
-        return nuevoId;
-    }
 	
 	public void setIdProfesor(String idProfesor) {
 		this.ID = ID;
