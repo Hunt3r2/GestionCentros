@@ -87,44 +87,37 @@ public class Asignatura {
     }
 
 	public void getAlumnosMatriculados() {
-		for (int i = 0; i < contadorAlumnosMatriculados; i++) {
-			if (alumnosMatriculados[i].getNombre() == null) {
-					if (contadorAlumnosMatriculados > 0) {
-			        for (int a = 0; a < contadorAlumnosMatriculados; a++) {
-			            System.out.println("- " + alumnosMatriculados[a].getNombre());
-			            for (Alumno alumno : alumnosMatriculados) {
-			                if (alumno != null) {
-			                    System.out.println(alumno.getId() + ". " + alumno.getNombreCompleto() +
-			                            " - Nota: " + alumno.getNotas(a));
-			                }
-			            }
-			            
-			        }
-			    } else {
-			        System.out.println("No hay alumnos matriculados en esta asignatura.");
-			    }
-			}else {
-		        System.out.println("No hay alumnos matriculados en esta asignatura.");
-		    }
-			}
-		}
+	    if (contadorAlumnosMatriculados > 0) {
+	        System.out.println("Alumnos matriculados en la asignatura:");
+	        for (int i = 0; i < contadorAlumnosMatriculados; i++) {
+	            Alumno alumno = alumnosMatriculados[i];
+	            if (alumno != null) {
+	                System.out.println(alumno.getId() + ". " + alumno.getNombreCompleto());
+	            }
+	        }
+	    } else {
+	        System.out.println("No hay alumnos matriculados en esta asignatura.");
+	    }
+	}
+
 	    
 	
 	public void desmatricularAlumno(Alumno alumno) {
-        for (int i = 0; i < alumnosMatriculados.length; i++) {
-            if (alumnosMatriculados[i] != null && alumnosMatriculados[i].equals(alumno)) {
-                // Desmatricular al alumno de la asignatura
-                alumnosMatriculados[i] = null;
+	    for (int i = 0; i < contadorAlumnosMatriculados; i++) {
+	        if (alumnosMatriculados[i] != null && alumnosMatriculados[i].equals(alumno)) {
+	            // Desmatricular al alumno de la asignatura
+	            alumnosMatriculados[i] = null;
 
-                // Desmatricular la asignatura del alumno
-                alumno.desmatricularDeAsignatura(this);
+	            // Desmatricular la asignatura del alumno
+	            alumno.desmatricularDeAsignatura(this);
 
-                System.out.println("Alumno desmatriculado correctamente de la asignatura.");
-                return;
-            }
-        }
-        System.out.println("El alumno no está matriculado en esta asignatura.");
-    }
+	            System.out.println("Alumno desmatriculado correctamente de la asignatura.");
+	            return;
+	        }
+	    }
+	    System.out.println("El alumno no está matriculado en esta asignatura.");
+	}
+
 	
 	public void consultarAlumnosMatriculados() {
         System.out.println("Alumnos matriculados en la asignatura:");
