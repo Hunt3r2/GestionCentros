@@ -13,14 +13,16 @@ public class Menú {
 	boolean clasellena = false;
 	static int contadorAlumnos = 1;
 	static int contadorProfesores = 1;
+	static int contadorAsignaturas = 1;
+
 	
 	public Menú() {
 			profesores = new Profesor(null, null, null, null, null, null, null, 0, 0);
 			this.vectorProfesor = new Profesor[2];
 			Alumnos = new Alumno(null, null, null, null, null, null, null, null, null);
-			this.vectorAlumno = new Alumno[2];
+			this.vectorAlumno = new Alumno[4];
 			Asignaturas = new Asignatura(null, null, null, null, null, 0);
-			this.vectorAsignatura = new Asignatura[2];
+			this.vectorAsignatura = new Asignatura[4];
 			
 		}
 	
@@ -100,8 +102,10 @@ public class Menú {
 				asignarProfesorAsignatura();
 				break;
 			case 4:
+				matricularAlumno();
 				break;
 			case 5:
+				agregarNota();
 				break;
 			case 6:
 				borrarAsignatura();
@@ -122,7 +126,7 @@ public class Menú {
 			
 			for (int i = 0; i < vectorAsignatura.length; i++) {
 		        if (vectorAsignatura[i] != null) {
-		            System.out.println(Asignaturas.generarIdAsignatura(i) + ". " + vectorAsignatura[i].getNombre());
+		            System.out.println(vectorAsignatura[i].getId() + ". " + vectorAsignatura[i].getNombre());
 		            hayAsignaturas = true;
 		        }
 			}
@@ -150,8 +154,14 @@ public class Menú {
 		                System.out.println("Codigo: " + vectorAsignatura[elegirAsig - 1].getId());
 		                Profesor profesorAsignado = vectorAsignatura[elegirAsig - 1].getProfesorAsignado();
 		                if (profesorAsignado != null) {
-		                System.out.println("Profesor: " + vectorAsignatura[elegirAsig - 1].getProfesorAsignado().getNombreCompleto());
-		                System.out.println("Alumnos: " + vectorAsignatura[elegirAsig - 1].getNotasAlumnos());
+		                System.out.println("Profesor: " + vectorAsignatura[elegirAsig - 1].getProfesorAsignado().getId());
+		                System.out.println("Alumnos: " );
+		                vectorAsignatura[elegirAsig - 1].getAlumnosMatriculados();
+		                if (vectorAsignatura[elegirAsig - 1].getNotasAlumnos() != null) {
+		                	System.out.println("Nota: " + vectorAsignatura[elegirAsig - 1].getNotasAlumnos());
+		                }else {
+		                	System.out.println("Sin nota registrada.");
+		                }
 		                }else {
 		                    System.out.println("Profesor no asignado");
 		                }
@@ -172,7 +182,9 @@ public class Menú {
 			System.out.println("Introduzca el nombre de la asignatura (MAX 70 caracteres):");
 			Scanner nom = new Scanner(System.in);
 			nuevaAsignatura.setNombre(nom.next());
+			nuevaAsignatura.setId("ASIG000" + contadorAsignaturas);
 			this.vectorAsignatura[huecoVectorAsignatura] = nuevaAsignatura;
+			contadorAsignaturas++;
 			return;
 			
 		}
@@ -295,6 +307,8 @@ public class Menú {
 	}
 
 		public void consultarProfesor() {
+			boolean volver = false;
+			do {
 	        boolean hayProfesores = false;
 
 			System.out.println("--------------------------------------------");
@@ -348,16 +362,15 @@ public class Menú {
 	            }
 	            break;
 	    }
+			}while(!volver);
 	}
+			
 		
 		public void pedirDatosProfesor() {
-				profesores.getNombre();
-				profesores.getApellido();
-				profesores.getEmail();
-				profesores.getTlfProfesor();
+			boolean volver = false;
+			do {
 				int huecoVectorProfesores = espacioVector();
 				Profesor nuevoProfesor = new Profesor(null, null, null, null, null, null, null, 0, 0);
-			    nuevoProfesor.setId("PROF000" + (contadorProfesores));
 
 					
 					System.out.println("Introduzca el nombre del profesor (MAX 30 caracteres):");
@@ -403,14 +416,16 @@ public class Menú {
 					System.out.println("Introduzca los días de asuntos propios del profesor (>=0):");
 					nuevoProfesor.setDiasAsuntosPropios(dias.nextInt());
 					nuevoProfesor.setNombre(nuevoProfesor.nombre);
-					nuevoProfesor.setPrimerApellido(nuevoProfesor.apellido);
+					nuevoProfesor.setPrimerApellido(nuevoProfesor.apellido);			    
+					nuevoProfesor.setId("PROF000" + (contadorProfesores));
 					this.vectorProfesor[huecoVectorProfesores] = nuevoProfesor;
 					contadorProfesores++;
-					return;
-					
-				}
+					return;	
 				
-	
+			}while(!volver);
+		}
+			
+				
 		
 		public void añadirAlumno() {
 			boolean volver = false;
@@ -477,6 +492,8 @@ public class Menú {
 		private String generarIdProfesor() {
 		    return String.format("PROF%04d", contadorProfesores);
 		}
+		
+		
 
 		
 		private boolean idProfesorExistente(String ID) {
@@ -538,23 +555,30 @@ public class Menú {
 
 
 		    if (numAsignatura > 0 && numAsignatura <= vectorAsignatura.length && vectorAsignatura[numAsignatura - 1] != null) {
-		        consultarProfesor();
 		        for (int i = 0; i < vectorProfesor.length; i++) {
 		            if (vectorProfesor[i] != null) {
-		                System.out.println(i + 1 + ". " + vectorProfesor[i].getNombreCompleto());
+		                System.out.println(vectorProfesor[i].getId() + ". " + vectorProfesor[i].getNombreCompleto());
 		            }
 		        }
+		        int numProfesor;
+		        Scanner prof = new Scanner(System.in);
+		        do {
+		            System.out.println("Seleccione el número del profesor que desea asignar a la asignatura (0 para cancelar):");
+		            numProfesor = prof.nextInt();
 
-		        System.out.println("Seleccione el número del profesor que desea asignar a la asignatura:");
-		        int numProfesor = asig.nextInt();
+		            if (numProfesor == 0) {
+		                return;
+		            }
 
-		        if (numProfesor > 0 && numProfesor <= vectorProfesor.length && vectorProfesor[numProfesor - 1] != null) {
-		        	Profesor profesorSeleccionado = vectorProfesor[numProfesor - 1];
-		            vectorAsignatura[numAsignatura - 1].setProfesorAsignado(profesorSeleccionado);
-		            System.out.println("Profesor asignado correctamente a la asignatura.");
-		        } else {
-		            System.out.println("Número de profesor no válido.");
-		        }
+		            if (numProfesor > 0 && numProfesor <= vectorProfesor.length && vectorProfesor[numProfesor - 1] != null) {
+		                Profesor profesorSeleccionado = vectorProfesor[numProfesor - 1];
+		                vectorAsignatura[numAsignatura - 1].setProfesorAsignado(profesorSeleccionado);
+		                System.out.println("Profesor asignado correctamente a la asignatura.");
+		                break;
+		            } else {
+		                System.out.println("Número de profesor no válido. Inténtelo de nuevo.");
+		            }
+		        } while (true);
 		    } else {
 		        System.out.println("Número de asignatura no válido.");
 		    }
@@ -589,6 +613,76 @@ public class Menú {
 
 		    System.out.println("Asignatura borrada correctamente.");
 		}
+		
+		private void matricularAlumno() {
+		    consultarAlumno();
+		    System.out.println("Seleccione el número del alumno que desea matricular en una asignatura:");
+		    int numAlumno = new Scanner(System.in).nextInt();
+
+		    if (numAlumno > 0 && numAlumno <= vectorAlumno.length && vectorAlumno[numAlumno - 1] != null) {
+		        consultarAsignaturas();
+		        System.out.println("Seleccione el número de la asignatura en la que desea matricular al alumno:");
+		        int numAsignatura = new Scanner(System.in).nextInt();
+
+		        if (numAsignatura > 0 && numAsignatura <= vectorAsignatura.length && vectorAsignatura[numAsignatura - 1] != null) {
+		            // Matricular al alumno en la asignatura
+		            vectorAsignatura[numAsignatura - 1].matricularAlumno(vectorAlumno[numAlumno - 1]);
+		            System.out.println("Alumno matriculado correctamente en la asignatura.");
+		        } else {
+		            System.out.println("Número de asignatura no válido.");
+		        }
+		    } else {
+		        System.out.println("Número de alumno no válido.");
+		    }
+		}
+		
+		public void agregarNota() {
+		    // Mostrar la lista de alumnos para seleccionar uno
+		    System.out.println("Seleccione el número del alumno al que desea agregar la nota:");
+		    for (int i = 0; i < vectorAlumno.length; i++) {
+		        if (vectorAlumno[i] != null) {
+		            System.out.println((i + 1) + ". " + vectorAlumno[i].getNombreCompleto());
+		        }
+		    }
+
+		    int numAlumno = new Scanner(System.in).nextInt();
+
+		    if (numAlumno > 0 && numAlumno <= vectorAlumno.length && vectorAlumno[numAlumno - 1] != null) {
+		        // Seleccionar el alumno
+		        Alumno alumnoSeleccionado = vectorAlumno[numAlumno - 1];
+
+		        // Mostrar la lista de asignaturas para seleccionar una
+		        System.out.println("Seleccione el número de la asignatura para agregar la nota:");
+		        for (int i = 0; i < vectorAsignatura.length; i++) {
+		            if (vectorAsignatura[i] != null) {
+		                System.out.println((i + 1) + ". " + vectorAsignatura[i].getNombre());
+		            }
+		        }
+
+		        int numAsignatura = new Scanner(System.in).nextInt();
+
+		        if (numAsignatura > 0 && numAsignatura <= vectorAsignatura.length && vectorAsignatura[numAsignatura - 1] != null) {
+		            // Solicitar la nota al usuario
+		            System.out.println("Ingrese la nota (>=0 && <=10):");
+		            double nota = new Scanner(System.in).nextDouble();
+
+		            // Validar la nota
+		            if (nota >= 0 && nota <= 10) {
+		                // Agregar la nota al alumno en la asignatura seleccionada
+		                alumnoSeleccionado.agregarNota(nota, numAsignatura - 1);
+		                System.out.println("Nota agregada correctamente.");
+		            } else {
+		                System.out.println("La nota ingresada no es válida.");
+		            }
+		        } else {
+		            System.out.println("Número de asignatura no válido.");
+		        }
+		    } else {
+		        System.out.println("Número de alumno no válido.");
+		    }
+		}
+
+
 
 		
 		

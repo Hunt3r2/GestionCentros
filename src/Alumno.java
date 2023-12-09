@@ -16,6 +16,7 @@ public class Alumno {
 	String numeroDocumento;
 	String ciclo;
 	private static int contadorAlumno = 1;
+	double[] notas;
 	String numeroID[] = new String[] {"0","1","2","3","4"};
 	
 	 public Alumno(String nombre, String primerApellido, String telefono, String email, String numeroDocumento, String ID, String apellido2, String apellido, String ciclo) {
@@ -34,33 +35,10 @@ public class Alumno {
 	    	this.telefono = telefono;
 	    	this.numeroDocumento = numeroDocumento;
 	    	this.ciclo = ciclo;
+	    	this.notas = new double[4];
 	    }
 	 
 
-	public String añadirAlumno() {
-			System.out.println("Introduzca el nombre del alumno (MAX 30 caracteres):");
-			Scanner nom = new Scanner(System.in);
-			this.nombre = nom.next();
-			System.out.println("Nombre: " + nombre);
-			System.out.println("Introduzca el primer apellido del alumno (MAX 40 caracteres): ");
-			Scanner ape = new Scanner(System.in);
-			this.apellido = ape.next();
-			System.out.println("Apellido: " + apellido);
-			System.out.println("Introduzca el segundo apellido del alumno (opcional):");
-			Scanner ape2 = new Scanner(System.in);	
-			this.apellido = ape.next();
-			System.out.println("Segundo apellido: " + apellido);
-			Scanner em = new Scanner(System.in);
-			System.out.println("Introduzca el email del alumno (cadena@alumno.es):");
-			this.email = em.next();
-			System.out.println("Email: " + email);
-			
-			System.out.println("Introduzca el teléfono del alumno ([6,7 o 9] y 8 números):");
-			this.email = em.next();
-			System.out.println("Telefono: " + email);
-			
-			return nombre;
-		}
 
 	void setSegundoApellido(String next) {
 		this.apellido2 = next;
@@ -134,5 +112,39 @@ public class Alumno {
         this.ID = ID;
 		
 	}
+
+	public String getNombreCompleto() {
+		return nombre + " " + apellido;
+	}
+
+
+
+	public double[] getNotas() {
+		return notas;
+	}
+
+
+
+	public void setNotas() {
+		this.notas = notas;
+	}
+
+
+
+	public void agregarNota(double nota, int indiceAsignatura) {
+        // Asegurarse de que el índice esté dentro del rango del array de notas
+        if (indiceAsignatura >= 0 && indiceAsignatura < notas.length) {
+            // Asegurarse de que la nota está dentro del rango permitido
+            if (nota >= 0 && nota <= 10) {
+                // Asignar la nota al índice correspondiente
+                notas[indiceAsignatura] = nota;
+            } else {
+                System.out.println("La nota ingresada no es válida. Debe estar entre 0 y 10.");
+            }
+        } else {
+            System.out.println("Índice de asignatura no válido.");
+        }
+    }
+	
 
 }
