@@ -600,34 +600,6 @@ public class Menú {
 			
 		}
 		
-		private String generarIdAlum() {
-	        return String.format("ALUM%04d", contadorAlumnos++);
-	    }
-		
-		private String generarIdProfesor() {
-		    return String.format("PROF%04d", contadorProfesores);
-		}
-		
-		
-
-		
-		private boolean idProfesorExistente(String ID) {
-	        for (Profesor profesor : vectorProfesor) {
-	            if (profesor != null && profesor.getId().equals(ID)) {
-	                return true;
-	            }
-	        }
-	        return false;
-	    }
-		
-		private boolean idAlumnoExistente(String ID) {
-	        for (Alumno alumnos : vectorAlumno) {
-	            if (alumnos != null && alumnos.getId().equals(ID)) {
-	                return true;
-	            }
-	        }
-	        return false;
-	    }
 		
 		private int espacioVector() {
 			int huecoVector = 0;
@@ -740,7 +712,6 @@ public class Menú {
 		        int numAsignatura = new Scanner(System.in).nextInt();
 
 		        if (numAsignatura > 0 && numAsignatura <= vectorAsignatura.length && vectorAsignatura[numAsignatura - 1] != null) {
-		            // Matricular al alumno en la asignatura
 		            vectorAsignatura[numAsignatura - 1].matricularAlumno(vectorAlumno[numAlumno - 1]);
 		            System.out.println("Alumno matriculado correctamente en la asignatura.");
 		        } else {
