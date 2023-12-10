@@ -406,7 +406,6 @@ public class Menú {
 			            nuevoProfesor.setSegundoApellido(segundoApellido);
 			            System.out.println("Segundo apellido: " + nuevoProfesor.getApellido2());
 			        }
-					System.out.println("Segundo apellido: " + nuevoProfesor.apellido2);
 					Scanner em = new Scanner(System.in);
 			        String email;
 			        do {
@@ -732,12 +731,12 @@ public class Menú {
 		
 		private void matricularAlumno() {
 		    consultarAlumno();
-		    System.out.println("Seleccione el número del alumno que desea matricular en una asignatura:");
+		    System.out.println("## Seleccione el número del alumno que desea matricular en una asignatura otra vez para confirmar:");
 		    int numAlumno = new Scanner(System.in).nextInt();
 
 		    if (numAlumno > 0 && numAlumno <= vectorAlumno.length && vectorAlumno[numAlumno - 1] != null) {
 		        consultarAsignaturas();
-		        System.out.println("Seleccione el número de la asignatura en la que desea matricular al alumno:");
+		        System.out.println("## Seleccione el número de la asignatura en la que desea matricular al alumno otra vez para confirmar:");
 		        int numAsignatura = new Scanner(System.in).nextInt();
 
 		        if (numAsignatura > 0 && numAsignatura <= vectorAsignatura.length && vectorAsignatura[numAsignatura - 1] != null) {
