@@ -171,6 +171,12 @@ public class Alumno {
             }
         }
     }
+
+
+
+	public String getSegundoApellido() {
+		return apellido2;
+	}
 	
 	
 

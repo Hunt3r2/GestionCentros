@@ -11,6 +11,8 @@ public class Menú {
 	Alumno[] vectorAlumno;
 	Asignatura[] vectorAsignatura;
 	boolean clasellena = false;
+	boolean AsignaturaLLena = false;
+	boolean clasellenaProf = false;
 	static int contadorAlumnos = 1;
 	static int contadorProfesores = 1;
 	static int contadorAsignaturas = 1;
@@ -156,11 +158,10 @@ public class Menú {
 		                Profesor profesorAsignado = vectorAsignatura[elegirAsig - 1].getProfesorAsignado();
 		                if (profesorAsignado != null) {
 		                System.out.println("Profesor: " + vectorAsignatura[elegirAsig - 1].getProfesorAsignado().getId());
-		                System.out.println("Alumnos: " );
-		                vectorAsignatura[elegirAsig - 1].getAlumnosMatriculados();
-		            
+	                    vectorAsignatura[elegirAsig - 1].getAlumnosMatriculados();
 		                }else {
 		                    System.out.println("Profesor no asignado");
+		                    vectorAsignatura[elegirAsig - 1].getAlumnosMatriculados();
 		                }
 		            } else {
 		                System.out.println("Opción no válida");
@@ -173,6 +174,7 @@ public class Menú {
 
 
 		private void añadirAsignatura() {
+			if (contadorAsignaturas < vectorAsignatura.length + 1) {
 			int huecoVectorAsignatura = espacioVectorAsignatura();
 			Asignatura nuevaAsignatura = new Asignatura(null, null, null, null, null, 0);
 			
@@ -184,8 +186,12 @@ public class Menú {
 			contadorAsignaturas++;
 			return;
 			
+		}else {
+            System.out.println("No hay espacio para más asignaturas.");
+            AsignaturaLLena = true;
+            return;
+        }
 		}
-
 
 		public void opcionProfesor() {
 			boolean volver = false;
@@ -332,8 +338,7 @@ public class Menú {
 			
 			switch(elegirProf) {
 			case 0:
-				Menú menu = new Menú();
-				menu.opcionProfesor();
+				return;
 	        default:
 	            if (elegirProf > 0 && elegirProf <= vectorProfesor.length && vectorProfesor[elegirProf - 1] != null) {
 	                System.out.println("--------------------------------------------");
@@ -353,7 +358,7 @@ public class Menú {
 	                	System.out.println("no");
 	                }
 	                System.out.println("Sueldo: " + vectorProfesor[elegirProf - 1].getSueldo());
-	                System.out.println("Dias de Asuntos Propios: " + vectorProfesor[elegirProf - 1].getDiasAsusntos());
+	                System.out.println("Dias de Asuntos Propios: " + vectorProfesor[elegirProf - 1].getDiasAsuntos());
 	            } else {
 	                System.out.println("Opción no válida");
 	            }
@@ -366,33 +371,71 @@ public class Menú {
 		public void pedirDatosProfesor() {
 			boolean volver = false;
 			do {
+				if (contadorProfesores < vectorProfesor.length + 1) {
 				int huecoVectorProfesores = espacioVector();
 				Profesor nuevoProfesor = new Profesor(null, null, null, null, null, null, null, 0, 0);
 
 					
-					System.out.println("Introduzca el nombre del profesor (MAX 30 caracteres):");
-					Scanner nom = new Scanner(System.in);
-					nuevoProfesor.setNombre(nom.next());
-					System.out.println("Nombre: " + nuevoProfesor.nombre);
-					System.out.println("Introduzca el primer apellido del profesor (MAX 40 caracteres): ");
+					 Scanner nom = new Scanner(System.in);
+				        String nombre;
+				        do {
+				            System.out.println("Introduzca el nombre del profesor (MAX 30 caracteres):");
+				            nombre = nom.next();
+				            if (nombre.length() > 30) {
+				                System.out.println("El nombre no puede tener más de 30 caracteres. Inténtelo de nuevo.");
+				            }
+				        } while (nombre.length() > 30);
+
+				    nuevoProfesor.setNombre(nombre);
+				    System.out.println("Nombre: " + nuevoProfesor.getNombre());
 					Scanner ape = new Scanner(System.in);
-					nuevoProfesor.setPrimerApellido(ape.next());
-					System.out.println("Apellido: " + nuevoProfesor.apellido);
-					System.out.println("Introduzca el segundo apellido del profesor (opcional):");
-					Scanner ape2 = new Scanner(System.in);	
-					nuevoProfesor.setSegundoApellido(ape2.next());
+				    String apellido;
+			        do {
+			            System.out.println("Introduzca el primer apellido del profesor (MAX 30 caracteres):");
+			            apellido = ape.next();
+			            if (apellido.length() > 30) {
+			                System.out.println("El apellido no puede tener más de 30 caracteres. Inténtelo de nuevo.");
+			            }
+			        } while (apellido.length() > 30);
+			        nuevoProfesor.setPrimerApellido(apellido);
+			        System.out.println("Apellido: " + nuevoProfesor.getApellido());
+			        Scanner ape2 = new Scanner(System.in);
+			        System.out.println("Introduzca el segundo apellido del profesor (opcional, presione Enter para omitir):");
+			        String segundoApellido = ape2.nextLine();
+			        if (!segundoApellido.isEmpty()) {
+			            nuevoProfesor.setSegundoApellido(segundoApellido);
+			            System.out.println("Segundo apellido: " + nuevoProfesor.getApellido2());
+			        }
 					System.out.println("Segundo apellido: " + nuevoProfesor.apellido2);
 					Scanner em = new Scanner(System.in);
-					System.out.println("Introduzca el email del profesor (cadena@profesor.es):");
-					nuevoProfesor.setEmail(em.next());
-					System.out.println("Email: " + nuevoProfesor.email);
+			        String email;
+			        do {
+			            System.out.println("Introduzca el email del profesor (cadena@profesor.es):");
+			            email = em.next();
+			            if (!validarFormatoEmail(email)) {
+			                System.out.println("Formato de correo electrónico no válido. Inténtelo de nuevo.");
+			            }
+			        } while (!validarFormatoEmail(email));
+
+			        nuevoProfesor.setEmail(email);
+			        System.out.println("Email: " + nuevoProfesor.getEmail());
 					Scanner dni = new Scanner(System.in);
 					System.out.println("Introduzca el documento del profesor (DNI o NIE):");
 					nuevoProfesor.setNumeroDocumento(dni.next());
-					Scanner tlf = new Scanner(System.in);
-					System.out.println("Introduzca el teléfono del profesor ([6,7 o 9] y 8 números):");
-					nuevoProfesor.telefono = tlf.next();
-					System.out.println("Telefono: " + nuevoProfesor.telefono);
+					Scanner tlfScanner = new Scanner(System.in);
+					String telefono = "";
+					do {
+					    System.out.println("Introduzca el teléfono del profesor ([6,7 o 9] y 8 números):");
+					    telefono = tlfScanner.next();
+
+					    if (telefono.matches("[679]\\d{8}")) {
+					        break;
+					    } else {
+					        System.out.println("El teléfono debe comenzar con 6, 7 u 9, seguido de 8 números. Inténtelo de nuevo.");
+					    }
+					} while (true);
+					nuevoProfesor.setTelefono(telefono);
+					System.out.println("Teléfono: " + nuevoProfesor.getTlfProfesor());
 					Scanner tutor = new Scanner(System.in);
 					System.out.println("Introduzca si el profesor es tutor (0: no; 1: sí):");
 					int esTutor = tutor.nextInt();
@@ -406,61 +449,132 @@ public class Menú {
 						System.out.println("Es tutor?: si");
 						break;
 					}
-					Scanner sueldo = new Scanner(System.in);
-					System.out.println("Introduzca el sueldo del profesor (>0):");
-					nuevoProfesor.setSueldo(sueldo.nextInt());
-					Scanner dias = new Scanner(System.in);
-					System.out.println("Introduzca los días de asuntos propios del profesor (>=0):");
-					nuevoProfesor.setDiasAsuntosPropios(dias.nextInt());
+					Scanner sueldoScanner = new Scanner(System.in);
+					int sueldo = 0;
+					boolean sueldoValido = false;
+					do {
+					    try {
+					        System.out.println("Introduzca el sueldo del profesor (>0):");
+					        sueldo = Integer.parseInt(sueldoScanner.next());
+
+					        if (sueldo > 0) {
+					            sueldoValido = true;
+					        } else {
+					            System.out.println("El sueldo debe ser mayor que 0. Inténtelo de nuevo.");
+					        }
+					    } catch (NumberFormatException e) {
+					        System.out.println("Por favor, ingrese un número entero válido.");
+					    }
+					} while (!sueldoValido);
+					nuevoProfesor.setSueldo(sueldo);
+					System.out.println("Sueldo: " + nuevoProfesor.getSueldo());
+					Scanner diasScanner = new Scanner(System.in);
+					int diasAsuntosPropios = 0;
+					boolean diasValidos = false;
+					do {
+					    try {
+					        System.out.println("Introduzca los días de asuntos propios del profesor (>=0):");
+					        diasAsuntosPropios = Integer.parseInt(diasScanner.next());
+
+					        if (diasAsuntosPropios >= 0) {
+					            diasValidos = true;
+					        } else {
+					            System.out.println("Los días de asuntos propios deben ser iguales o mayores a 0. Inténtelo de nuevo.");
+					        }
+					    } catch (NumberFormatException e) {
+					        System.out.println("Por favor, ingrese un número entero válido.");
+					    }
+					} while (!diasValidos);
+					nuevoProfesor.setDiasAsuntosPropios(diasAsuntosPropios);
+					System.out.println("Días de Asuntos Propios: " + nuevoProfesor.getDiasAsuntos());
 					nuevoProfesor.setNombre(nuevoProfesor.nombre);
 					nuevoProfesor.setPrimerApellido(nuevoProfesor.apellido);			    
 					nuevoProfesor.setId("PROF000" + (contadorProfesores));
 					this.vectorProfesor[huecoVectorProfesores] = nuevoProfesor;
 					contadorProfesores++;
 					return;	
-				
+				} else {
+	                System.out.println("No hay espacio para más alumnos. La clase está llena.");
+	                clasellenaProf = true;
+	                break;
+	            }
 			}while(!volver);
 		}
 			
 				
 		
 		public void añadirAlumno() {
+			 if (clasellena) {
+			        System.out.println("No se pueden agregar más alumnos. La clase está llena.");
+			        return;
+			    }
 			boolean volver = false;
 			do {
-			espacioVector();
-			Alumnos.getNombre();
-			Alumnos.getApellido();
-			Alumnos.getEmail();
-			Alumnos.getTlfAlumno();
-			int huecoVectorAlumno = espacioVectorAlumno();
+			
 
-			if(huecoVectorAlumno<vectorAlumno.length) {
+			if(contadorAlumnos < vectorAlumno.length + 1) {
+				int huecoVectorAlumno = espacioVectorAlumno();
 				Alumno nuevoAlumno = new Alumno(null, null, null, null, null, null, null, null, null);
 			
 				
-			System.out.println("Introduzca el nombre del alumno (MAX 30 caracteres):");
-			Scanner nom = new Scanner(System.in);
-			nuevoAlumno.setNombre(nom.next());
-			System.out.println("Nombre: " + nuevoAlumno.nombre);
-			System.out.println("Introduzca el primer apellido del alumno (MAX 40 caracteres): ");
+				 Scanner nom = new Scanner(System.in);
+			        String nombre;
+			        do {
+			            System.out.println("Introduzca el nombre del alumno (MAX 30 caracteres):");
+			            nombre = nom.next();
+			            if (nombre.length() > 30) {
+			                System.out.println("El nombre no puede tener más de 30 caracteres. Inténtelo de nuevo.");
+			            }
+			        } while (nombre.length() > 30);
+
+			    nuevoAlumno.setNombre(nombre);
+			System.out.println("Nombre: " + nuevoAlumno.getNombre());
 			Scanner ape = new Scanner(System.in);
-			nuevoAlumno.setPrimerApellido(ape.next());
-			System.out.println("Apellido: " + nuevoAlumno.apellido);
-			System.out.println("Introduzca el segundo apellido del alumno (opcional):");
-			Scanner ape2 = new Scanner(System.in);
-			nuevoAlumno.setSegundoApellido(ape.next());
-			System.out.println("Segundo apellido: " + nuevoAlumno.apellido);
+		    String apellido;
+	        do {
+	            System.out.println("Introduzca el primer apellido del alumno (MAX 30 caracteres):");
+	            apellido = ape.next();
+	            if (apellido.length() > 30) {
+	                System.out.println("El apellido no puede tener más de 30 caracteres. Inténtelo de nuevo.");
+	            }
+	        } while (apellido.length() > 30);
+	        nuevoAlumno.setPrimerApellido(apellido);
+	        System.out.println("Introduzca el segundo apellido del alumno (opcional, presione Enter para omitir):");
+	        Scanner ape2 = new Scanner(System.in);
+	        String segundoApellido = ape2.nextLine();
+	        if (!segundoApellido.isEmpty()) {
+	            nuevoAlumno.setSegundoApellido(segundoApellido);
+	        }
+			System.out.println("Segundo apellido: " + nuevoAlumno.getSegundoApellido());
 			Scanner em = new Scanner(System.in);
-			System.out.println("Introduzca el email del alumno (cadena@alumno.es):");
-			nuevoAlumno.setEmail(em.next());
-			System.out.println("Email: " + nuevoAlumno.email);
+	        String email;
+	        do {
+	            System.out.println("Introduzca el email del alumno (cadena@alumno.es):");
+	            email = em.next();
+	            if (!validarFormatoEmail(email)) {
+	                System.out.println("Formato de correo electrónico no válido. Inténtelo de nuevo.");
+	            }
+	        } while (!validarFormatoEmail(email));
+	        nuevoAlumno.setEmail(email);
+			System.out.println("Email: " + nuevoAlumno.getEmail());
 			Scanner dni = new Scanner(System.in);
 			System.out.println("Introduzca el documento del alumno (DNI o NIE):");
 			nuevoAlumno.setNumeroDocumento(dni.next());
 			Scanner tlf = new Scanner(System.in);
-			System.out.println("Introduzca el teléfono del alumno ([6,7 o 9] y 8 números):");
-			nuevoAlumno.setTelefono(tlf.next());
-			System.out.println("Telefono: " + nuevoAlumno.email);
+			Scanner tlfScanner = new Scanner(System.in);
+			String telefono = "";
+			do {
+			    System.out.println("Introduzca el teléfono del alumno ([6,7 o 9] y 8 números):");
+			    telefono = tlfScanner.next();
+
+			    if (telefono.matches("[679]\\d{8}")) {
+			        break;
+			    } else {
+			        System.out.println("El teléfono debe comenzar con 6, 7 u 9, seguido de 8 números. Inténtelo de nuevo.");
+			    }
+			} while (true);
+			nuevoAlumno.setTelefono(telefono);
+			System.out.println("Teléfono: " + nuevoAlumno.getTlfAlumno());
 			Scanner ciclo = new Scanner(System.in);
 			System.out.println("Desea añadir el ciclo del alumno? (0: no; 1: si): ");
 			int ciclo1 = ciclo.nextInt();
@@ -475,11 +589,16 @@ public class Menú {
 				volver = true;
 			}
 		    nuevoAlumno.setId("ALUM000" + (contadorAlumnos));
-		    contadorAlumnos++;
 			this.vectorAlumno[huecoVectorAlumno] = nuevoAlumno;
-			
-			}
+			contadorAlumnos++;
+
+			}else {
+		        System.out.println("No hay espacio para más alumnos. La clase está llena.");
+		        clasellena = true;
+		        break;
+		    }
 			}while(!volver);
+			
 		}
 		
 		private String generarIdAlum() {
@@ -717,6 +836,12 @@ public class Menú {
 		    } else {
 		        System.out.println("Número de alumno no válido.");
 		    }
+		}
+		
+		private boolean validarFormatoEmail(String email) {
+		    // Expresión regular para validar el formato de un correo electrónico
+		    String regex = "^[a-zA-Z0-9_+&*-]+(?:\\.[a-zA-Z0-9_+&*-]+)*@(?:[a-zA-Z0-9-]+\\.)+[a-zA-Z]{2,7}$";
+		    return email.matches(regex);
 		}
 
 

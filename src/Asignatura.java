@@ -65,11 +65,7 @@ public class Asignatura {
 		this.id = id;
 	}
 	
-	private void borrarAsignatura() {
-		if (asignaturaEliminada && contadorAsignaturas > 0) {
-	        contadorAsignaturas--;
-	    }
-	}
+
 	public void matricularAlumno(Alumno alumno) {
         if (contadorAlumnosMatriculados < alumnosMatriculados.length) {
             alumnosMatriculados[contadorAlumnosMatriculados++] = alumno;
@@ -92,7 +88,7 @@ public class Asignatura {
 	        for (int i = 0; i < contadorAlumnosMatriculados; i++) {
 	            Alumno alumno = alumnosMatriculados[i];
 	            if (alumno != null) {
-	                System.out.println(alumno.getId() + ". " + alumno.getNombreCompleto());
+	                System.out.println(alumno.getId() + ". " + alumno.getNombreCompleto() + " - Nota: " + alumno.getNotas(i));
 	            }
 	        }
 	    } else {
@@ -111,7 +107,6 @@ public class Asignatura {
 	            // Desmatricular la asignatura del alumno
 	            alumno.desmatricularDeAsignatura(this);
 
-	            System.out.println("Alumno desmatriculado correctamente de la asignatura.");
 	            return;
 	        }
 	    }
@@ -123,7 +118,7 @@ public class Asignatura {
         System.out.println("Alumnos matriculados en la asignatura:");
         for (int i = 0; i < alumnosMatriculados.length; i++) {
             if (alumnosMatriculados[i] != null) {
-                System.out.println(alumnosMatriculados[i].getId() + ". " + alumnosMatriculados[i].getNombreCompleto());
+                System.out.println(alumnosMatriculados[i].getId() + ". " + alumnosMatriculados[i].getNombreCompleto() + alumnosMatriculados[i].getNotas(i));
             }
         }
     }

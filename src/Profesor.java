@@ -82,7 +82,7 @@ public class Profesor {
 	}
 
 
-	private void setTelefono(String telefono) {
+	public void setTelefono(String telefono) {
 		this.telefono = telefono;			
 	}
 
@@ -124,6 +124,10 @@ public class Profesor {
 		return apellido;
 		
 	}
+	
+	public String getApellido2() {
+		return apellido2;
+	}
 
 
 
@@ -133,7 +137,7 @@ public class Profesor {
 
 
 
-	public int getDiasAsusntos() {
+	public int getDiasAsuntos() {
 		return diasAsuntosPropios;
 	}
 
