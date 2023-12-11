@@ -809,9 +809,8 @@ public class Menú {
 		}
 		
 		private boolean validarFormatoEmail(String email) {
-		    // Expresión regular para validar el formato de un correo electrónico
-		    String regex = "^[a-zA-Z0-9_+&*-]+(?:\\.[a-zA-Z0-9_+&*-]+)*@(?:[a-zA-Z0-9-]+\\.)+[a-zA-Z]{2,7}$";
-		    return email.matches(regex);
+		    String cadenaEmail = "^[a-zA-Z0-9_+&*-]+(?:\\.[a-zA-Z0-9_+&*-]+)*@(?:[a-zA-Z0-9-]+\\.)+[a-zA-Z]{2,8}$";
+		    return email.matches(cadenaEmail);
 		}
 
 
