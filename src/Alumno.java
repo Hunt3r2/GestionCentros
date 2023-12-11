@@ -135,9 +135,7 @@ public class Alumno {
 
 
 	public void agregarNota(double nota, int indiceAsignatura) {
-        // Asegurarse de que el índice esté dentro del rango del array de notas
         if (indiceAsignatura >= 0 && indiceAsignatura < notas.length) {
-            // Asegurarse de que la nota está dentro del rango permitido
             if (nota >= 0 && nota <= 10) {
                 notas[indiceAsignatura] = nota;
             } else {
@@ -153,7 +151,6 @@ public class Alumno {
     }
 	
 	public void matricularEnAsignatura(Asignatura asignatura) {
-        // Verifica si hay espacio en el array antes de matricular al alumno
         for (int i = 0; i < asignaturasMatriculadas.length; i++) {
             if (asignaturasMatriculadas[i] == null) {
                 asignaturasMatriculadas[i] = asignatura;
@@ -165,7 +162,6 @@ public class Alumno {
 	public void desmatricularDeAsignatura(Asignatura asignatura) {
         for (int i = 0; i < asignaturasMatriculadas.length; i++) {
             if (asignaturasMatriculadas[i] != null && asignaturasMatriculadas[i].equals(asignatura)) {
-                // Desmatricular la asignatura del alumno
                 asignaturasMatriculadas[i] = null;
                 return;
             }
