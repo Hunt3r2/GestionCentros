@@ -22,9 +22,9 @@ public class Menú {
 			profesores = new Profesor(null, null, null, null, null, null, null, 0, 0);
 			this.vectorProfesor = new Profesor[2];
 			Alumnos = new Alumno(null, null, null, null, null, null, null, null, null);
-			this.vectorAlumno = new Alumno[4];
+			this.vectorAlumno = new Alumno[6];
 			Asignaturas = new Asignatura(null, null, null, null, null, 0);
-			this.vectorAsignatura = new Asignatura[4];
+			this.vectorAsignatura = new Asignatura[6];
 			
 		}
 	
@@ -493,7 +493,7 @@ public class Menú {
 					contadorProfesores++;
 					return;	
 				} else {
-	                System.out.println("No hay espacio para más alumnos. La clase está llena.");
+	                System.out.println("No hay espacio para más profesores. La clase está llena.");
 	                clasellenaProf = true;
 	                break;
 	            }
@@ -671,6 +671,7 @@ public class Menú {
 		    }
 		}
 		
+		
 		private void borrarAsignatura() {
 		    System.out.println("--------------------------------------------");
 		    System.out.println("Listado de asignaturas:");
@@ -702,12 +703,24 @@ public class Menú {
 		}
 		
 		private void matricularAlumno() {
-		    consultarAlumno();
+			
+			for (int i = 0; i < vectorAlumno.length; i++) {
+		        if (vectorAlumno[i] != null) {
+		            System.out.println(i + 1 + ". " + vectorAlumno[i].getId() + " # " + vectorAlumno[i].getNombreCompleto());
+		        }
+		    }
+			
 		    System.out.println("## Seleccione el número del alumno que desea matricular en una asignatura otra vez para confirmar:");
 		    int numAlumno = new Scanner(System.in).nextInt();
 
 		    if (numAlumno > 0 && numAlumno <= vectorAlumno.length && vectorAlumno[numAlumno - 1] != null) {
-		        consultarAsignaturas();
+		    	
+		    	for (int i = 0; i < vectorAsignatura.length; i++) {
+			        if (vectorAsignatura[i] != null) {
+			            System.out.println(i + 1 + ". " + vectorAsignatura[i].getId() + " # " + vectorAsignatura[i].getNombre());
+			        }
+			    }
+		    	
 		        System.out.println("## Seleccione el número de la asignatura en la que desea matricular al alumno otra vez para confirmar:");
 		        int numAsignatura = new Scanner(System.in).nextInt();
 
@@ -724,11 +737,10 @@ public class Menú {
 		}
 		
 		public void agregarNota() {
-		    // Mostrar la lista de alumnos para seleccionar uno
 		    System.out.println("Seleccione el número del alumno al que desea agregar la nota:");
 		    for (int i = 0; i < vectorAlumno.length; i++) {
 		        if (vectorAlumno[i] != null) {
-		            System.out.println((i + 1) + ". " + vectorAlumno[i].getNombreCompleto());
+		            System.out.println((i + 1) + ". " + vectorAlumno[i].getId() + " # " +vectorAlumno[i].getNombreCompleto());
 		        }
 		    }
 

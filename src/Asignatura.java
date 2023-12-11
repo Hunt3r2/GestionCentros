@@ -22,7 +22,7 @@ public class Asignatura {
 		this.setProfesorAsignado(profesorAsignado);
 		this.nombre = nombre;
 	    this.id = generarIdAsignatura(contadorAsignaturas++);
-	    this.alumnosMatriculados = new Alumno[4]; 
+	    this.alumnosMatriculados = new Alumno[6]; 
         this.contadorAlumnosMatriculados = 0;
 
 	}
@@ -75,7 +75,6 @@ public class Asignatura {
         for (int i = 0; i < alumnosMatriculados.length; i++) {
             if (alumnosMatriculados[i] == null) {
                 alumnosMatriculados[i] = alumno;
-                // Agrega la asignatura a las matriculadas por el alumno
                 alumno.matricularEnAsignatura(this);
                 break;
             }
@@ -101,10 +100,8 @@ public class Asignatura {
 	public void desmatricularAlumno(Alumno alumno) {
 	    for (int i = 0; i < contadorAlumnosMatriculados; i++) {
 	        if (alumnosMatriculados[i] != null && alumnosMatriculados[i].equals(alumno)) {
-	            // Desmatricular al alumno de la asignatura
 	            alumnosMatriculados[i] = null;
 
-	            // Desmatricular la asignatura del alumno
 	            alumno.desmatricularDeAsignatura(this);
 
 	            return;
