@@ -99,10 +99,6 @@ public class Profesor {
 	}
 
 	
-	public void setIdProfesor(String idProfesor) {
-		this.ID = ID;
-	}
-	
 	public String getNombre() {
 		return nombre;
 	}

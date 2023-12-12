@@ -48,11 +48,6 @@ public class Asignatura {
         return profesorAsignado;
     }
 
-	public String getCodigo() {
-		// TODO Auto-generated method stub
-		return null;
-	}
-
 	public double[] getNotasAlumnos() {
 		return notasAlumno;
 	}
