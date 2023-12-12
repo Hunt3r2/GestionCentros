@@ -10,9 +10,6 @@ public class Menú {
 	Profesor[] vectorProfesor;
 	Alumno[] vectorAlumno;
 	Asignatura[] vectorAsignatura;
-	boolean clasellena = false;
-	boolean AsignaturaLLena = false;
-	boolean clasellenaProf = false;
 	static int contadorAlumnos = 1;
 	static int contadorProfesores = 1;
 	static int contadorAsignaturas = 1;
@@ -24,7 +21,7 @@ public class Menú {
 			Alumnos = new Alumno(null, null, null, null, null, null, null, null, null);
 			this.vectorAlumno = new Alumno[6];
 			Asignaturas = new Asignatura(null, null, null, null, null, 0);
-			this.vectorAsignatura = new Asignatura[6];
+			this.vectorAsignatura = new Asignatura[4];
 			
 		}
 	
@@ -175,20 +172,19 @@ public class Menú {
 
 		private void añadirAsignatura() {
 			if (contadorAsignaturas < vectorAsignatura.length + 1) {
-			int huecoVectorAsignatura = espacioVectorAsignatura();
-			Asignatura nuevaAsignatura = new Asignatura(null, null, null, null, null, 0);
-			
-			System.out.println("Introduzca el nombre de la asignatura (MAX 70 caracteres):");
-			Scanner nom = new Scanner(System.in);
-			nuevaAsignatura.setNombre(nom.next());
-			nuevaAsignatura.setId("ASIG000" + contadorAsignaturas);
-			this.vectorAsignatura[huecoVectorAsignatura] = nuevaAsignatura;
-			contadorAsignaturas++;
-			return;
+				int huecoVectorAsignatura = espacioVectorAsignatura();
+				Asignatura nuevaAsignatura = new Asignatura(null, null, null, null, null, 0);
+				
+				System.out.println("Introduzca el nombre de la asignatura (MAX 70 caracteres):");
+				Scanner nom = new Scanner(System.in);
+				nuevaAsignatura.setNombre(nom.next());
+				nuevaAsignatura.setId("ASIG000" + contadorAsignaturas);
+				this.vectorAsignatura[huecoVectorAsignatura] = nuevaAsignatura;
+				contadorAsignaturas++;
+				return;
 			
 		}else {
             System.out.println("No hay espacio para más asignaturas.");
-            AsignaturaLLena = true;
             return;
         }
 		}
@@ -418,9 +414,24 @@ public class Menú {
 
 			        nuevoProfesor.setEmail(email);
 			        System.out.println("Email: " + nuevoProfesor.getEmail());
-					Scanner dni = new Scanner(System.in);
-					System.out.println("Introduzca el documento del profesor (DNI o NIE):");
-					nuevoProfesor.setNumeroDocumento(dni.next());
+			        Scanner dniScanner = new Scanner(System.in);
+			        String documento;
+
+			        do {
+			            System.out.println("Introduzca el documento del profesor (DNI o NIE):");
+			            documento = dniScanner.next();
+
+			            String regexDNI = "\\d{8}[A-HJ-NP-TV-Z]";
+			            String regexNIE = "[XYZ]\\d{7}[A-HJ-NP-TV-Z]";
+
+			            if (documento.matches(regexDNI) || documento.matches(regexNIE)) {
+			                break;
+			            } else {
+			                System.out.println("Formato de documento no válido. Inténtelo de nuevo.");
+			            }
+			        } while (true);
+
+			        nuevoProfesor.setNumeroDocumento(documento);
 					Scanner tlfScanner = new Scanner(System.in);
 					String telefono = "";
 					do {
@@ -494,7 +505,6 @@ public class Menú {
 					return;	
 				} else {
 	                System.out.println("No hay espacio para más profesores. La clase está llena.");
-	                clasellenaProf = true;
 	                break;
 	            }
 			}while(!volver);
@@ -503,10 +513,6 @@ public class Menú {
 				
 		
 		public void añadirAlumno() {
-			 if (clasellena) {
-			        System.out.println("No se pueden agregar más alumnos. La clase está llena.");
-			        return;
-			    }
 			boolean volver = false;
 			do {
 			
@@ -556,9 +562,24 @@ public class Menú {
 	        } while (!validarFormatoEmail(email));
 	        nuevoAlumno.setEmail(email);
 			System.out.println("Email: " + nuevoAlumno.getEmail());
-			Scanner dni = new Scanner(System.in);
-			System.out.println("Introduzca el documento del alumno (DNI o NIE):");
-			nuevoAlumno.setNumeroDocumento(dni.next());
+			Scanner dniScanner = new Scanner(System.in);
+			String documento;
+
+			do {
+			    System.out.println("Introduzca el documento del alumno (DNI o NIE):");
+			    documento = dniScanner.next();
+
+			    String DNI = "\\d{8}[A-HJ-NP-TV-Z]";
+			    String NIE = "[XYZ]\\d{7}[A-HJ-NP-TV-Z]";
+
+			    if (documento.matches(DNI) || documento.matches(NIE)) {
+			        break;
+			    } else {
+			        System.out.println("Formato de documento no válido. Inténtelo de nuevo.");
+			    }
+			} while (true);
+
+			nuevoAlumno.setNumeroDocumento(documento);
 			Scanner tlf = new Scanner(System.in);
 			Scanner tlfScanner = new Scanner(System.in);
 			String telefono = "";
@@ -593,7 +614,6 @@ public class Menú {
 
 			}else {
 		        System.out.println("No hay espacio para más alumnos. La clase está llena.");
-		        clasellena = true;
 		        break;
 		    }
 			}while(!volver);
@@ -813,21 +833,10 @@ public class Menú {
 		}
 		
 		private boolean validarFormatoEmail(String email) {
-		    String cadenaEmail = "^[a-zA-Z0-9_+&*-]+(?:\\.[a-zA-Z0-9_+&*-]+)*@(?:[a-zA-Z0-9-]+\\.)+[a-zA-Z]{2,8}$";
+		    String cadenaEmail = "^[a-zA-Z0-9_+&*-]+(?:\\.[a-zA-Z0-9_+&*-]+)*@(?:[a-zA-Z0-9-]+\\.)+[a-zA-Z]{2,7}$";
 		    return email.matches(cadenaEmail);
 		}
 
 
-
-
-		
-		
-		
-		
-		
-		// para sacar los datos uso un bucle for con string format, tambien deberia hacer  
-		
-		
-	
 
 }

@@ -22,7 +22,7 @@ public class Asignatura {
 		this.setProfesorAsignado(profesorAsignado);
 		this.nombre = nombre;
 	    this.id = generarIdAsignatura(contadorAsignaturas++);
-	    this.alumnosMatriculados = new Alumno[6]; 
+	    this.alumnosMatriculados = new Alumno[3]; 
         this.contadorAlumnosMatriculados = 0;
 
 	}
